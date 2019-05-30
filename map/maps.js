@@ -45,7 +45,7 @@ function loadMap(settings) {
     .domain([300, 1200])
     .range([50000, 150000]);
 
-  d3.json("http://dhruvkore.github.io/DataVisualization_FinalProject/map/json/" + settings['path'] + ".json", function(error, layer) {
+  d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/json/" + settings['path'] + ".json", function(error, layer) {
     if (error) return console.error(error);
     var shapes = topojson.feature(layer, layer.objects.shapes);
     var projection = d3.geo.mercator()
@@ -122,7 +122,7 @@ function drawChicago(hide) {
     .domain([300, 1200])
     .range([50000, 150000]);
 
-  d3.json("http://dhruvkore.github.io/DataVisualization_FinalProject/map/json/chicago.json", function(error, layer) {
+  d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/json/chicago.json", function(error, layer) {
     if (error) return console.error(error);
     var shapes = topojson.feature(layer, layer.objects.chicago);
     var projection = d3.geo.mercator()
@@ -157,7 +157,7 @@ function loadOverlay(settings) {
   if (currentOverlay['settings'] == settings) {
     paintOverlay(currentOverlay['layer'], settings);
   } else {
-    d3.json("http://dhruvkore.github.io/DataVisualization_FinalProject/map/json/" + settings['path'] + ".json", function(error, layer) {
+    d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/json/" + settings['path'] + ".json", function(error, layer) {
       if (error) return console.error(error);
       paintOverlay(layer, settings);
     });
