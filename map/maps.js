@@ -311,27 +311,6 @@ $(document).ready(function() {
 
   var overlay = {
     'none': {},
-    'streets': {
-      'path': 'streets', 'scale': main_scale, 'num_colors': 1, 'template': StreetsTemplate,
-      'stroke-width': 1, 'opacity': '0.2', 'fill': false, 'point-radius': 1, 'repaint': false},
-    'el': {
-      'path': 'cta_rail', 'scale': el_scale, 'num_colors': 1, 'stroke-width': 4,
-      'opacity': '0.7', 'template': ElTemplate, 'fill': false, 'point-radius': 1, 'repaint': false},
-    'bike_routes': {'path': 'bike_routes', 'scale': main_scale, 'num_colors': 1, 'stroke-width': 1,
-      'opacity': '0.2', 'template': BikeRouteTemplate, 'fill': false, 'point-radius': 1,
-      'repaint': false},
-    'bike_racks': {'path': 'bike_racks', 'scale': alt_scale, 'num_colors': 9, 'stroke-width': 1,
-      'opacity': '0.8', 'fill': true, 'point-radius': 2, 'repaint': true,
-      'template': BikeRackTemplate},
-    'landmarks': {'path': 'landmarks', 'scale': alt_scale, 'num_colors': 9, 'stroke-width': 1,
-      'opacity': '0.8', 'fill': true, 'point-radius': 5, 'repaint': true,
-      'template': LandmarksTemplate},
-    'public_art': {'path': 'public_art', 'scale': alt_scale, 'num_colors': 9, 'stroke-width': 1,
-      'opacity': '0.8', 'fill': true, 'template': PublicArtTemplate, 'point-radius': 5,
-      'repaint': true},
-    'dry_precincts': {'path': 'dry_precincts', 'scale': black_scale, 'num_colors': 1,
-      'stroke-width': 0, 'opacity': '0.5', 'template': DryPrecinctTemplate, 'fill': true,
-      'point-radius': 1, 'repaint': false},
     'none': {'none': 'none'}
   };
 
