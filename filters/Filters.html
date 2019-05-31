@@ -11,23 +11,41 @@
 	  crossorigin="anonymous"
 	/>
 
+	<link rel="stylesheet" type="text/css" href="./filters.css"/>
+
+
   </head>
 <body>
  	<div class="ui-box" style='border-style: solid; border-width: 2px; width: 370px; border-color: #a3a3a3' >
-    	<div class="col-sm-2">
+    	<div class="priceRange">
+    		<h6 align="center">Price Range</h6>
     		<p id="value-range"></p>
     	</div>
     	<div class="col-sm">
     		<div id="slider-range">
     		</div>
     	</div>
+
     
     	<!-- The checkbox amenitites -->
-    	<div class="check-boxes">	
-	    	<input type="checkbox" class="myCheckbox" value="parks"> Parks
-	   		<input type="checkbox" class="myCheckbox" value="police"> Police Stations
-	   		<input type="checkbox" class="myCheckbox" value="schools"> Schools
-	   		<input type="checkbox" class="myCheckbox" value="health-clinics"> Health Clinics		
+    	<div class="check-boxes" >	
+    		<h6 align="center">Amenities</h6>
+    		<label class ="container">Parks
+	    		<input type="checkbox" class="myCheckbox" value="parks"/> 
+	    		<span class="checkmark"></span>
+	    	</label>
+	   		<label class ="container">Police Stations
+	   			<input type="checkbox" class="myCheckbox" value="police"> 
+	   			<span class="checkmark"></span>
+	   		</label>
+	   		<label class ="container">Schools
+	   			<input type="checkbox" class="myCheckbox" value="schools">
+	   			<span class="checkmark"></span>
+	   		</label>
+	   		<label class ="container">Health Clinics
+	   			<input type="checkbox" class="myCheckbox" value="health-clinics">	
+	   			<span class="checkmark"></span>
+	   		</label>
   		</div>
   	
 	</div>
@@ -45,7 +63,7 @@
 
 		myText = d3.select(".ui-box")
 			.append("text")
-			.attr('font-size', '14')
+			.attr('font-size', '12')
 			.attr('id', "textline")
   			;
 
@@ -61,8 +79,8 @@
 	       .fill('#2196f3')
 	       .on('onchange', val => {
 		      d3.select('p#value-range')
-		      	.text("Price Range: From " + val.map(d3.format('.02s'))
-		      	.join(' to '));
+		      	.text("From " + val.map(d3.format('.02s'))
+		      	.join(' to '))
 		      	range = val;
 		    });
 
@@ -70,14 +88,14 @@
 		   .select('div#slider-range')
 		   .append('svg')
 		   .attr('width', 500)
-		   .attr('height', 100)
+		   .attr('height', 90)
 		   .append('g')
 		   .attr('transform', 'translate(30,30)');
 
 		gRange.call(sliderRange);
 
 		//Configues the price range text above slider only at initialization
-		d3.select('p#value-range').text("Price Range: From " + sliderRange
+		d3.select('p#value-range').text("From " + sliderRange
 		   .value()
 		   .map(d3.format('.02s'))
 		   .join(' to ')
@@ -97,7 +115,8 @@
           			if (cb.property)
           				choices.push(cb.property("value"));
           		} 
-          		
+
+          		//The line of text is for testing: makes sure the right boxes are being triggered
           		d3.select("#textline")
           			 	.text(choices);
         	});
