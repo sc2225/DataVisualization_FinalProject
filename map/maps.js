@@ -122,7 +122,7 @@ function drawChicago(hide) {
     .domain([300, 1200])
     .range([50000, 150000]);
 
-  d3.json("/json/chicago.topojson", function(error, layer) {
+  d3.json("/map/json/chicago.topojson", function(error, layer) {
     if (error) return console.error(error);
     var shapes = topojson.feature(layer, layer.objects.chicago);
     var projection = d3.geo.mercator()
