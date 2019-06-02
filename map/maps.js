@@ -97,6 +97,8 @@ function showPosition(position) {
       .translate([width/2, height/2]);
   var coords = projection([position.coords.longitude, position.coords.latitude]);
 
+
+  gOver = svg.append('g');
   gOver.append('text')
     .attr("class", "youarehere")
     .attr("transform", function() { return "translate(" + coords + ")scale(" + mainScale + ")"; })
@@ -182,7 +184,8 @@ function paintOverlay(layer, settings) {
   var path = d3.geo.path()
     .pointRadius(settings['point-radius']/mainScale)
     .projection(projection);
-  gOver = svg.append('g');
+
+ // gOver = svg.append('g');
   gOver.selectAll("path")
     .data(shapes.features)
     .enter()
@@ -339,8 +342,10 @@ $(document).ready(function() {
       $('select#overlay').val(params['overlay']);
     }
   }
+
   loadMap(map);
   loadOverlay(over);
+
   $('#page-link > a').attr(
     'href', '/index.html?map=' + $('select#map').val() + '&overlay=' + $('select#overlay').val());
   $('select#map').change(function(e) {
@@ -396,3 +401,5 @@ $(document).ready(function() {
     }
   });
 });
+
+
