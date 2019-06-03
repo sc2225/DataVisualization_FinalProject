@@ -94,7 +94,7 @@
 		      d3.select('p#value-range')
 		      	.text("From " + val.map(d3.format('.02s'))
 		      	.join(' to '))
-		      	pricerange = val;
+		      	pricerange = val.map(d3.format('.2r'));
 		    });
 
 		var gRange = d3
@@ -153,7 +153,7 @@
 		      d3.select('p#SATtext')
 		      	.text("From " + val.map(d3.format('.3r'))
 		      	.join(' to '))
-		      	SATrange = val;
+		      	SATrange = val.map(d3.format('.3r'));
 		    });
 
 		var gRangeSAT = d3
