@@ -21,10 +21,17 @@
     		<h6 align="center">Price Range</h6>
     		<p id="value-range"></p>
     	</div>
+
     	<div class="col-sm">
     		<div id="slider-range">
     		</div>
     	</div>
+
+    	<div class="SATSlider">
+    		<h6 align= "center">SAT Score Range</h6>
+    		<p id ="SAT-range"></p>
+    	</div>
+
 
     
     	<!-- The checkbox amenitites -->
@@ -56,7 +63,8 @@
 		//  	To get current checked boxes, use "checked" array.
 
 		var checked = []; //holds current checkedboxes
-		var range = []; //holds the current range
+		var pricerange = []; //holds the current range
+		var SATrannge = [];
 
 		//TODO: "dataSlider" needs to be replaced with actual max rent price and min rent price.
 		var dataSlider = [1200, 3500];
@@ -81,7 +89,7 @@
 		      d3.select('p#value-range')
 		      	.text("From " + val.map(d3.format('.02s'))
 		      	.join(' to '))
-		      	range = val;
+		      	pricerange = val;
 		    });
 
 		var gRange = d3
@@ -122,6 +130,42 @@
         	});
         	checked = choices;
 		}
+
+		//SAT Slider Code:
+		var dataSliderSAT = [400, 1600];
+
+		var sliderRangeSAT = d3
+		   .sliderBottom()
+		   .min(d3.min(dataSliderSAT))
+		   .max(d3.max(dataSliderSAT))
+		   .width(250)
+	       .tickFormat(d3.format('.02s'))
+	       .ticks(5)
+	       .default([1000, 1300])
+	       .fill('#2196f3')
+	       .on('onchange', val => {
+		      d3.select('p#value-range')
+		      	.text("From " + val.map(d3.format('.02s'))
+		      	.join(' to '))
+		      	SATrange = val;
+		    });
+
+		var gRangeSAT = d3
+		   .select('div#slider-range')
+		   .append('svg')
+		   .attr('width', 500)
+		   .attr('height', 90)
+		   .append('g')
+		   .attr('transform', 'translate(30,30)');
+
+		gRangeSAT.call(sliderRangeSAT);
+
+		//Configues the price range text above slider only at initialization
+		d3.select('p#value-range').text("From " + sliderRangeSAT
+		   .value()
+		   .map(d3.format('.02s'))
+		   .join(' to ')
+		);
 
 
 	</script>
