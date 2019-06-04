@@ -97,6 +97,8 @@ function showPosition(position) {
       .translate([width/2, height/2]);
   var coords = projection([position.coords.longitude, position.coords.latitude]);
 
+
+  gOver = svg.append('g');
   gOver.append('text')
     .attr("class", "youarehere")
     .attr("transform", function() { return "translate(" + coords + ")scale(" + mainScale + ")"; })
@@ -122,7 +124,11 @@ function drawChicago(hide) {
     .domain([300, 1200])
     .range([50000, 150000]);
 
+<<<<<<< HEAD
   d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/json/chicago.json", function(error, layer) {
+=======
+  d3.json("/map/json/chicago.topojson", function(error, layer) {
+>>>>>>> master
     if (error) return console.error(error);
     var shapes = topojson.feature(layer, layer.objects.chicago);
     var projection = d3.geo.mercator()
@@ -182,7 +188,8 @@ function paintOverlay(layer, settings) {
   var path = d3.geo.path()
     .pointRadius(settings['point-radius']/mainScale)
     .projection(projection);
-  gOver = svg.append('g');
+
+ // gOver = svg.append('g');
   gOver.selectAll("path")
     .data(shapes.features)
     .enter()
@@ -339,8 +346,10 @@ $(document).ready(function() {
       $('select#overlay').val(params['overlay']);
     }
   }
+
   loadMap(map);
   loadOverlay(over);
+
   $('#page-link > a').attr(
     'href', '/index.html?map=' + $('select#map').val() + '&overlay=' + $('select#overlay').val());
   $('select#map').change(function(e) {
@@ -396,3 +405,5 @@ $(document).ready(function() {
     }
   });
 });
+
+
