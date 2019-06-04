@@ -71,3 +71,9 @@ p#value-range {
 	text-align: center;
 	font-size: 13px;
 }
+
+p#SATtext {
+  padding-left: 0px;
+  text-align: center;
+  font-size: 13px;
+}
