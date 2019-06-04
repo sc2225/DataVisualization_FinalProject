@@ -3,7 +3,7 @@ var heatMapVis = function(){
         drawMap: function(svg, bottom, top){
             //Load in GeoJSON data
             
-            d3.json("chicago.json", function(json) {
+            d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/chicago.json", function(json) {
 
                 // //Width and height
                 var width = 900;
