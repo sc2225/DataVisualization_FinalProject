@@ -3,6 +3,7 @@
   <head>
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 	<script src="https://unpkg.com/d3-simple-slider"></script>
+	<script src="filters.js"></script>
 
 	<link
 	  rel="stylesheet"
@@ -64,15 +65,14 @@
 
 	<script>
 
-		//NOTE: To get current range, use "range" array.
+		//NOTE: To get current range, use "pricerange" array.
 		//  	To get current checked boxes, use "checked" array.
+		//		To get current SAT range, use "SATrange"
 
-		var checked = []; //holds current checkedboxes
-		var pricerange = []; //holds the current range
-		var SATrannge = []; //holds SAT Range
+		var checked = []; 
+		var pricerange = []; 
+		var SATrange = []; 
 
-		//TODO: "dataSlider" needs to be replaced with actual max rent price and min rent price.
-		var dataSlider = [1200, 3500];
 
 		myText = d3.select(".ui-box")
 			.append("text")
@@ -80,22 +80,6 @@
 			.attr('id', "textline")
   			;
 
-
-		var sliderRange = d3
-		   .sliderBottom()
-		   .min(d3.min(dataSlider))
-		   .max(d3.max(dataSlider))
-		   .width(250)
-	       .tickFormat(d3.format('.02s'))
-	       .ticks(5)
-	       .default([2000, 2500])
-	       .fill('#2196f3')
-	       .on('onchange', val => {
-		      d3.select('p#value-range')
-		      	.text("From " + val.map(d3.format('.02s'))
-		      	.join(' to '))
-		      	pricerange = val.map(d3.format('.2r'));
-		    });
 
 		var gRange = d3
 		   .select('div#slider-range')
@@ -105,56 +89,15 @@
 		   .append('g')
 		   .attr('transform', 'translate(30,30)');
 
-		gRange.call(sliderRange);
+		 gRange.call(sliderRange);
 
-		//Configues the price range text above slider only at initialization
-		d3.select('p#value-range').text("From " + sliderRange
-		   .value()
-		   .map(d3.format('.02s'))
-		   .join(' to ')
-		);
+		init_priceText(); 
 
 
 		//on click event handling for checkboxes
 		d3.selectAll(".myCheckbox")
 			.on("change", update);
 
-		// update(): this gets what boxes have been checked. It sends back what boxes are checked every time a checkbox has been clicked/unclicked
-		function update() {
-			var choices = [];
-			d3.selectAll(".myCheckbox").each(function(d){
-          		cb = d3.select(this);
-          		if(cb.property("checked")){
-          			if (cb.property)
-          				choices.push(cb.property("value"));
-          		} 
-
-          		//The line of text is for testing: makes sure the right boxes are being triggered
-          		d3.select("#textline")
-          			 	.text(choices);
-        	});
-        	checked = choices;
-		}
-
-		//SAT Slider Code:
-		var dataSliderSAT = [400, 1600];
-
-
-		var sliderRangeSAT = d3
-		   .sliderBottom()
-		   .min(d3.min(dataSliderSAT))
-		   .max(d3.max(dataSliderSAT))
-		   .width(250)
-	       .tickFormat(d3.format('0'))
-	       .ticks(5)
-	       .default([1000, 1300])
-	       .fill('#2196f3')
-	       .on('onchange', val => {
-		      d3.select('p#SATtext')
-		      	.text("From " + val.map(d3.format('.3r'))
-		      	.join(' to '))
-		      	SATrange = val.map(d3.format('.3r'));
-		    });
 
 		var gRangeSAT = d3
 		   .select('div#SAT-range')
@@ -166,12 +109,7 @@
 
 		gRangeSAT.call(sliderRangeSAT);
 
-		//Configues the price range text above slider only at initialization
-		d3.select('p#SATtext').text("From " + sliderRangeSAT
-		   .value()
-		   .map(d3.format('.3r'))
-		   .join(' to ')
-		);
+		init_SATtext();
 
 
 	</script>
