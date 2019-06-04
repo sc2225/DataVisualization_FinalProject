@@ -6,15 +6,15 @@ var heatMapVis = function(){
             d3.json("chicago.json", function(json) {
 
                 // //Width and height
-                var width = 900;
-                var height = 450;
+                var width = +svg.attr("width");
+                var height = +svg.attr("height");
 
                 // create a first guess for the projection
-                var center = d3.geo.centroid(json)
+                var center = d3.geoCentroid(json)
                 var scale = 150;
-                var projection = d3.geo.mercator().scale(scale).center(center);
+                var projection = d3.geoMercator().scale(scale).center(center);
                 //Define path generator
-                var path = d3.geo.path()
+                var path = d3.geoPath()
                                 .projection(projection);
 
                 // using the path determine the bounds of the current map and use
@@ -27,12 +27,12 @@ var heatMapVis = function(){
                                 height - (bounds[0][1] + bounds[1][1]) / 2];
 
                 // new projection
-                projection = d3.geo.mercator().center(center)
+                projection = d3.geoMercator().center(center)
                 .scale(scale * 0.9).translate(offset);
                 path = path.projection(projection);
 
                 //Create SVG element
-                svg = d3.select(".chart")
+                svg = d3.select("#chart")
                         .attr("width", width)
                         .attr("height", height)
                         
@@ -46,7 +46,7 @@ var heatMapVis = function(){
                 .attr("class", "zipcode")
                 .attr("fill", function(d){
                     var val = Math.random();
-                    if(val > bottom || val < top){
+                    if(val > top || val < bottom){
                         return 'rgb(150,150,150)'
                     }else{
                     var red = (43 * val);
