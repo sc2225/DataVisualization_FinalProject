@@ -35,7 +35,7 @@ var heatMapVis = function(){
                 svg = d3.select(".chart")
                         .attr("width", width)
                         .attr("height", height)
-                        
+
 
                 //Bind data and create one path per GeoJSON feature
                 svg.selectAll("path")
@@ -43,7 +43,9 @@ var heatMapVis = function(){
                 .enter()
                 .append("path")
                 .attr("d", path)
-                .attr("class", "zipcode")
+                .attr("class", function(d){
+                    return d.properties.ZIP
+                })
                 .attr("fill", function(d){
                     var val = Math.random();
                     if(val > bottom || val < top){
