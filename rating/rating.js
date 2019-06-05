@@ -13,7 +13,16 @@ var rating = function(minPrice, maxPrice, parks, minSAT, schools, zipcodeData){
 
 	value += zipcodeData.schools;
 
-	value += ( zipcodeData.avgSATScore * 10 / 2400 );
+	value += ( zipcodeData.avgSATScore * 10 / 2400 ); /* arbitrary multiplier */
+
+	try{
+		if(zipcodeData.avgRentPrice != null && zipcodeData.avgRentPrice > 0){
+			output = value / zipcodeData.avgRentPrice;
+		}
+	}
+	catch(err){
+		return 0.0;
+	}
 
 	return output;
 }
