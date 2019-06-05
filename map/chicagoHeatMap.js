@@ -4,7 +4,7 @@ var heatMapVis = function(){
     var newHeatMap = {
         drawMap: function(svg, bottom, top, data){
             
-            d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/chicago.json", function(json) {
+            d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/chicago.json", function(json) {
 
                 //Loads heat map data from csv -- will work with any CSV where zip is first column
                 d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-by-Zip-Chi.csv", function(data){
