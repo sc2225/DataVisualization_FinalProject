@@ -9,15 +9,19 @@ var rating = function(minPrice, maxPrice, parks, minSAT, schools, zipcodeData){
 
 	var value = 0.0;
 
-	value += zipcodeData.parks;
+	if(parks == 1){
+		value += zipcodeData.parks;
+	}
 
-	value += zipcodeData.schools;
+	if(schools == 1){
+		value += zipcodeData.schools;
+	}
 
-	value += ( zipcodeData.avgSATScore * 10 / 2400 ); /* arbitrary multiplier */
+	value += ( zipcodeData.avgSATScore * 10 / 2400 ); /* arbitrary multiplier of 10 */
 
 	try{
 		if(zipcodeData.avgRentPrice != null && zipcodeData.avgRentPrice > 0){
-			output = value / zipcodeData.avgRentPrice;
+			output = value / zipcodeData.avgRentPrice; /* Value per Dollar */
 		}
 	}
 	catch(err){
