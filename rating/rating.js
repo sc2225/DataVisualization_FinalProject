@@ -3,7 +3,9 @@ var rating = function(minPrice, maxPrice, parks, minSAT, schools, zipcodeData){
 
 	var output = 0.0;
 
-	if(minPrice > zipcodeData.avgRentPrice || maxPrice < zipcodeData.avgRentPrice){
+	if(minPrice > zipcodeData.avgRentPrice || 
+		maxPrice < zipcodeData.avgRentPrice || 
+		minSAT > zipcodeData.avgSATScore){
 		return 0.0;
 	}
 
