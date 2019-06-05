@@ -3,9 +3,9 @@ var rating = function(minPrice, maxPrice, parks, minSAT, schools, zipcodeData){
 
 	var output = 0.0;
 
-	if(minPrice > zipcodeData.avgRentPrice || 
-		maxPrice < zipcodeData.avgRentPrice || 
-		minSAT > zipcodeData.avgSATScore){
+	if(minPrice > zipcodeData.MedGrossRent || 
+		maxPrice < zipcodeData.MedGrossRent || 
+		minSAT > zipcodeData.avgSAT){
 		return 0.0;
 	}
 
@@ -19,11 +19,11 @@ var rating = function(minPrice, maxPrice, parks, minSAT, schools, zipcodeData){
 		value += zipcodeData.schools;
 	}
 
-	value += ( zipcodeData.avgSATScore * 10 / 2400 ); /* arbitrary multiplier of 10 */
+	value += ( zipcodeData.avgSAT * 10 / 2400 ); /* arbitrary multiplier of 10 */
 
 	try{
-		if(zipcodeData.avgRentPrice != null && zipcodeData.avgRentPrice > 0){
-			output = value / zipcodeData.avgRentPrice; /* Value per Dollar */
+		if(zipcodeData.MedGrossRent != null && zipcodeData.MedGrossRent > 0){
+			output = value / zipcodeData.MedGrossRent; /* Value per Dollar */
 		}
 	}
 	catch(err){
