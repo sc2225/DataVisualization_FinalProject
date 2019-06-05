@@ -7,16 +7,17 @@
 }
 </style>
 
-<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="chicagoHeatMap.js"></script>
+<body>
+  <svg id="chart" width="900" height="450"></svg>
+</body>
 <script>
 
-var svg = d3.select(".chart")
-            .attr("width", 900)
-            .attr("height", 450)
+var chartSvg = d3.select("#chart")
 
     var HM = heatMapVis();
-    HM.drawMap(.25, .9)
+    HM.drawMap(chartSvg, .25, .9)
 
 
   /*
@@ -24,67 +25,6 @@ var svg = d3.select(".chart")
   lots of help from http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
   */
 
-//   //Load in GeoJSON data
-//   d3.json("chicago.json", function(json) {
-
-//     //Width and height
-//     var width = 900;
-//     var height = 450;
-
-//     var topBound = 0.90;
-//     var bottomBound = 0.25;
-
-//     // create a first guess for the projection
-//     var center = d3.geo.centroid(json)
-//     var scale = 150;
-//     var projection = d3.geo.mercator().scale(scale).center(center);
-//     //Define path generator
-//     var path = d3.geo.path()
-//                     .projection(projection);
-
-//     // using the path determine the bounds of the current map and use
-//     // these to determine better values for the scale and translation
-//     var bounds = path.bounds(json);
-//     var hscale = scale * width / (bounds[1][0] - bounds[0][0]);
-//     var vscale = scale * height / (bounds[1][1] - bounds[0][1]);
-//     var scale = (hscale < vscale) ? hscale : vscale;
-//     var offset = [width - (bounds[0][0] + bounds[1][0]) / 2,
-//                      height - (bounds[0][1] + bounds[1][1]) / 2];
-
-//     // new projection
-//     projection = d3.geo.mercator().center(center)
-//      .scale(scale * 0.9).translate(offset);
-//     path = path.projection(projection);
-
-//     //Create SVG element
-//     var svg = d3.select(".chart")
-//                .attr("width", width)
-//                .attr("height", height)
-               
-
-//     //Bind data and create one path per GeoJSON feature
-//     svg.selectAll("path")
-//       .data(json.features)
-//       .enter()
-//       .append("path")
-//       .attr("d", path)
-//       .attr("class", "zipcode")
-//       .attr("fill", function(d){
-//           var val = Math.random();
-//           if(val > topBound || val < bottomBound){
-//               return 'rgb(150,150,150)'
-//           }else{
-//           var red = (43 * val);
-//           var blue = (43 * val);
-//           var green = (216 * val);
-//           console.log(`rgb(${red}, ${green}, ${blue}), ${val}`)
-//           return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
-//           }
-//       })
-
-//   });
 </script>
 
-<body>
-  <svg class="chart"></svg>
-</body>
+
