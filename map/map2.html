@@ -22,7 +22,7 @@ var chartSvg = d3.select("#chart")
 var satSvg = d3.select("#SAT")
 
     var HM = heatMapVis();
-    HM.drawMap(chartSvg, .25, .9)
+    HM.drawMap(chartSvg, 400, 1600)
 
     HM.dispatch.on("selected",
                         function(d){

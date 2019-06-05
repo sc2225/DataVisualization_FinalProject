@@ -8,14 +8,30 @@ var heatMapVis = function(){
 
                 //Loads heat map data from csv -- will work with any CSV where zip is first column
                 d3.csv("avg-SAT-by-Zip-Chi.csv", function(data){
-                    var dict = {};
+                    var SATdict = {};
+                    var rentDict={};
+                    
                     var sats = [];
+                    var rents = [];
                     for(d=0; d < data.length; d++){
-                        sats.push(data[d].avgSAT)
-                        dict[data[d].zip] = data[d].avgSAT;
+                        if(data[d].avgSAT === "null"){}
+                        else{sats.push(data[d].avgSAT);}
+                        rents.push(data[d].MedGrossRent)
+                        SATdict[data[d].zip] = data[d].avgSAT;
+                        rentDict[data[d].zip] = data[d].MedGrossRent;
                     }
 
-                    var maxVal = Math.max(...sats);
+                    var maxSAT = Math.max(...sats);
+                    var minSAT = Math.min(...sats);
+
+                    var maxRent = Math.max(...rents);
+                    var minRent = Math.min(...rents);
+
+                    console.log(sats)
+                    console.log(`MAX SAT: ${maxSAT}`)
+                    console.log(`MIN SAT: ${minSAT}`)
+                    console.log(`MAX RENT: ${maxRent}`)
+                    console.log(`MIN RENT: ${minRent}`)
 
                 // //Width and height
                 var width = +svg.attr("width");
@@ -59,11 +75,11 @@ var heatMapVis = function(){
                     return d.properties.ZIP
                 })
                 .attr("sat", function(d){
-                    return dict[d.properties.ZIP];
+                    return SATdict[d.properties.ZIP];
                 })
                 .attr("fill", function(d){
-                    var val = dict[d.properties.ZIP]/maxVal;
-                    if(val > top || val < bottom){
+                    var val = (rentDict[d.properties.ZIP]-minRent)/(maxRent - minRent);
+                    if(SATdict[d.properties.ZIP] > top || SATdict[d.properties.ZIP] < bottom){
                         return 'rgb(150,150,150)'
                     }else{
                     var red = (0 * val);
@@ -72,7 +88,7 @@ var heatMapVis = function(){
                     return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                     }
                 })
-                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, dict[d.properties.ZIP]);});
+                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
                 
 
             });
