@@ -9,15 +9,26 @@
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="chicagoHeatMap.js"></script>
+<!-- <script src="Avg-SAT-by-Zip-Chi.csv.js"></script> -->
 <body>
   <svg id="chart" width="900" height="450"></svg>
+  <svg id="SAT" width="200" height="200"></svg>
 </body>
 <script>
 
+
+
 var chartSvg = d3.select("#chart")
+var satSvg = d3.select("#SAT")
 
     var HM = heatMapVis();
     HM.drawMap(chartSvg, .25, .9)
+
+    HM.dispatch.on("selected",
+                        function(d){
+                          console.log(`AVG sat is: ${d}`);
+                        });
+
 
 
   /*

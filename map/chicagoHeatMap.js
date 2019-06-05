@@ -1,9 +1,21 @@
+
+
 var heatMapVis = function(){
     var newHeatMap = {
-        drawMap: function(svg, bottom, top){
-            //Load in GeoJSON data
+        drawMap: function(svg, bottom, top, data){
             
             d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/chicago.json", function(json) {
+
+                //Loads heat map data from csv -- will work with any CSV where zip is first column
+                d3.csv("avg-SAT-by-Zip-Chi.csv", function(data){
+                    var dict = {};
+                    var sats = [];
+                    for(d=0; d < data.length; d++){
+                        sats.push(data[d].avgSAT)
+                        dict[data[d].zip] = data[d].avgSAT;
+                    }
+
+                    var maxVal = Math.max(...sats);
 
                 // //Width and height
                 var width = +svg.attr("width");
@@ -43,23 +55,33 @@ var heatMapVis = function(){
                 .enter()
                 .append("path")
                 .attr("d", path)
-                .attr("class", function(d){
+                .attr("id", function(d){
                     return d.properties.ZIP
                 })
+                .attr("sat", function(d){
+                    return dict[d.properties.ZIP];
+                })
                 .attr("fill", function(d){
-                    var val = Math.random();
+                    var val = dict[d.properties.ZIP]/maxVal;
                     if(val > top || val < bottom){
                         return 'rgb(150,150,150)'
                     }else{
-                    var red = (43 * val);
-                    var blue = (43 * val);
-                    var green = (216 * val);
+                    var red = (0 * val);
+                    var blue = (0 * val);
+                    var green = (255 * val);
                     return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                     }
                 })
+                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, dict[d.properties.ZIP]);});
+                
 
             });
-        }
+                
+
+            });
+        },
+
+        dispatch: d3.dispatch("selected")
     }
     return newHeatMap;
 }
