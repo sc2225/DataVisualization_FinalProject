@@ -7,7 +7,7 @@ var heatMapVis = function(){
             d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/chicago.json", function(json) {
 
                 //Loads heat map data from csv -- will work with any CSV where zip is first column
-                d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/avg-SAT-by-Zip-Chi.csv", function(data){
+                d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-by-Zip-Chi.csv", function(data){
                     var SATdict = {};
                     var rentDict={};
                     
