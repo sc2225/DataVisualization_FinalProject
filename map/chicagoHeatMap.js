@@ -10,6 +10,7 @@ var heatMapVis = function(){
                 d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-by-Zip-Chi.csv", function(data){
                     var SATdict = {};
                     var rentDict={};
+                    var zipcode = {};
                     
                     var sats = [];
                     var rents = [];
@@ -19,6 +20,8 @@ var heatMapVis = function(){
                         rents.push(data[d].MedGrossRent)
                         SATdict[data[d].zip] = data[d].avgSAT;
                         rentDict[data[d].zip] = data[d].MedGrossRent;
+                        zipcode[data[d].zip] = data[d].zip;
+
                     }
 
                     var maxSAT = Math.max(...sats);
@@ -68,7 +71,8 @@ var heatMapVis = function(){
                 var tool_tip = d3.tip()
                     .attr("class", "d3-tip")
                     .offset([20, 120])
-                    .html( "<p>Region:</p><div id='tipDiv'></div>"
+                    .html(
+                         "<p id='region'></p><div id='tipDiv'></div>"
                     );
 
                 svg.call(tool_tip);
@@ -101,6 +105,12 @@ var heatMapVis = function(){
 
                 .on("mouseover", function(d) {
                     tool_tip.show();
+
+                    d3.select("p#region")
+                        .append("text")
+                        .text("Neighborhood: " + zipcode[d.properties.ZIP]);
+
+
                     var tipSVG = d3.select("#tipDiv")
                     .append("svg")
                     .attr("width", 150)
@@ -114,16 +124,17 @@ var heatMapVis = function(){
                         .transition() //facilitates the transition from empty canvas to bar
                         .duration(1000) //how long it takes for the bar to move
                         .attr("width", function() {
+                            console.log(rentDict[d.properties.ZIP]);
                            return SATbarwidth(SATdict[d.properties.ZIP]);
                         }); //length of the bar
 
-                tipSVG.append("text")
-                    .text(SATdict[d.properties.ZIP])
-                    .attr("x", 5)
-                    .attr("y", 30)
-                    .transition()
-                    .duration(1000)
-                    .attr("x", 6 + SATbarwidth(SATdict[d.properties.ZIP]))
+                    tipSVG.append("text")
+                        .text(SATdict[d.properties.ZIP])
+                        .attr("x", 5)
+                        .attr("y", 30)
+                        .transition()
+                        .duration(1000)
+                        .attr("x", 6 + SATbarwidth(SATdict[d.properties.ZIP]))
                 })
                 .on('mouseout', tool_tip.hide)
 
@@ -132,8 +143,6 @@ var heatMapVis = function(){
                 
 
             });
-                
-
             });
         },
 
@@ -149,6 +158,13 @@ function SATbarwidth(SATscore) {
     }      
     return SATscore *.1;
 }
+
+// given value, create the text for tooltips
+function tipsText(value) {
+
+}
+
+
 
 // if SAT is undefined, return empty bar with width 0
 // If SAT is null, return empty bar with width 0.
