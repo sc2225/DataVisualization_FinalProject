@@ -73,6 +73,8 @@
                     "60614"
                 ], 
                 "ZIP": "60647", 
+                "parks" : "22",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "20", 
                     "21", 
@@ -142,6 +144,8 @@
                     "60618"
                 ], 
                 "ZIP": "60639", 
+                "parks" : "11",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "19", 
                     "20", 
@@ -188,6 +192,8 @@
                     "60639"
                 ], 
                 "ZIP": "60707", 
+                "parks" : "",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "18", 
                     "19", 
@@ -233,6 +239,8 @@
                     "60612"
                 ], 
                 "ZIP": "60651", 
+                "parks" : "10",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "23", 
                     "24", 
@@ -332,6 +340,8 @@
                     "60632"
                 ], 
                 "ZIP": "60638", 
+                "parks" : "11",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "30", 
                     "56", 
@@ -408,6 +418,8 @@
                     "60620"
                 ], 
                 "ZIP": "60652", 
+                "parks" : "7",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "65", 
                     "66", 
@@ -672,6 +684,8 @@
                     "60659"
                 ], 
                 "ZIP": "60626", 
+                "parks" : "24",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "1", 
                     "2", 
@@ -752,6 +766,8 @@
                     "60659"
                 ], 
                 "ZIP": "60645", 
+                "parks" : "8",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "1", 
                     "2"
@@ -873,6 +889,8 @@
                     "60626"
                 ], 
                 "ZIP": "60660", 
+                "parks" : "8",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "1", 
                     "2", 
@@ -1171,6 +1189,8 @@
                     "60613"
                 ], 
                 "ZIP": "60640", 
+                "parks" : "13",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "3", 
                     "4", 
@@ -1226,6 +1246,8 @@
                     "60660"
                 ], 
                 "ZIP": "60625", 
+                "parks" : "13",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "13", 
                     "14", 
@@ -1275,6 +1297,8 @@
                     "60625"
                 ], 
                 "ZIP": "60641", 
+                "parks" : "8",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "14", 
                     "15", 
@@ -1556,6 +1580,8 @@
                     "60614"
                 ], 
                 "ZIP": "60657", 
+                "parks" : "11",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "5", 
                     "6", 
@@ -1753,6 +1779,8 @@
                     "60621"
                 ], 
                 "ZIP": "60615", 
+                "parks" : "12",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "38", 
                     "39", 
@@ -1817,6 +1845,8 @@
                     "60620"
                 ], 
                 "ZIP": "60621", 
+                "parks" : "14",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "40", 
                     "67", 
@@ -1878,6 +1908,8 @@
                     "60629"
                 ], 
                 "ZIP": "60636", 
+                "parks" : "8",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "63", 
                     "66", 
@@ -2249,6 +2281,8 @@
                     "60619"
                 ], 
                 "ZIP": "60649", 
+                "parks" : "8",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "42", 
                     "43", 
@@ -2582,6 +2616,8 @@
                     "60628"
                 ], 
                 "ZIP": "60617", 
+                "parks" : "22",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "43", 
                     "45", 
@@ -2663,6 +2699,8 @@
                     "60620"
                 ], 
                 "ZIP": "60643", 
+                "parks" : "21",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "49", 
                     "53", 
@@ -2723,6 +2761,8 @@
                     "60624"
                 ], 
                 "ZIP": "60612", 
+                "parks" : "14",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "23", 
                     "24", 
@@ -2791,6 +2831,8 @@
                     "60644"
                 ], 
                 "ZIP": "60624", 
+                "parks" : "15",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "23", 
                     "25", 
@@ -2857,6 +2899,8 @@
                     "60624"
                 ], 
                 "ZIP": "60644", 
+                "parks" : "12",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "25", 
                     "26"
@@ -3008,6 +3052,8 @@
                     "60616"
                 ], 
                 "ZIP": "60653", 
+                "parks" : "17",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "35", 
                     "36", 
@@ -3067,6 +3113,8 @@
                     "60629"
                 ], 
                 "ZIP": "60609", 
+                "parks" : "21",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "34", 
                     "35", 
@@ -3524,6 +3572,8 @@
                     "60656"
                 ], 
                 "ZIP": "60666", 
+                "parks" : "",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "76"
                 ]
@@ -3576,6 +3626,8 @@
                     "60630"
                 ], 
                 "ZIP": "60618", 
+                "parks" : "17",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "14", 
                     "16", 
@@ -3801,6 +3853,8 @@
                     "60608"
                 ], 
                 "ZIP": "60616", 
+                "parks" : "18",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "28", 
                     "31", 
@@ -3856,6 +3910,8 @@
                     "60623"
                 ], 
                 "ZIP": "60608", 
+                "parks" : "23",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "28", 
                     "29", 
@@ -4182,6 +4238,8 @@
                     "60657"
                 ], 
                 "ZIP": "60614", 
+                "parks" : "20",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "22", 
                     "24", 
@@ -4429,6 +4487,8 @@
                     "60646"
                 ], 
                 "ZIP": "60631", 
+                "parks" : "10",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "10", 
                     "11", 
@@ -4592,6 +4652,8 @@
                     "60656"
                 ], 
                 "ZIP": "60646", 
+                "parks" : "11",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "10", 
                     "11", 
@@ -4751,6 +4813,8 @@
                     "60620"
                 ], 
                 "ZIP": "60628", 
+                "parks" : "14",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "49", 
                     "50", 
@@ -4776,6 +4840,8 @@
                 ], 
                 "name": "60827 & 60633",
                 "ZIP": "60827", 
+                "parks" : "",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "54", 
                     "55",
@@ -4865,6 +4931,8 @@
                     "60618"
                 ], 
                 "ZIP": "60630", 
+                "parks" : "13",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "10", 
                     "11", 
@@ -5251,6 +5319,8 @@
                     "60634"
                 ], 
                 "ZIP": "60656", 
+                "parks" : "3",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "10", 
                     "11", 
@@ -5439,6 +5509,8 @@
                     "60643"
                 ], 
                 "ZIP": "60655", 
+                "parks" : "5",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "72", 
                     "74", 
@@ -5506,6 +5578,8 @@
                     "60625"
                 ], 
                 "ZIP": "60659", 
+                "parks" : "7",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "12", 
                     "13", 
@@ -5648,6 +5722,8 @@
                     "60656"
                 ], 
                 "ZIP": "60634", 
+                "parks" : "",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "15", 
                     "17", 
@@ -5731,6 +5807,8 @@
                     "60618"
                 ], 
                 "ZIP": "60613", 
+                "parks" : "9",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "3", 
                     "4", 
@@ -5823,6 +5901,8 @@
                     "60608"
                 ], 
                 "ZIP": "60632", 
+                "parks" : "7",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "30", 
                     "56", 
@@ -5905,6 +5985,8 @@
                     "60608"
                 ], 
                 "ZIP": "60623", 
+                "parks" : "17",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "29", 
                     "30", 
@@ -6004,6 +6086,8 @@
                     "60609"
                 ], 
                 "ZIP": "60629", 
+                "parks" : "8",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "56", 
                     "62", 
@@ -6080,6 +6164,8 @@
                     "60636"
                 ], 
                 "ZIP": "60620", 
+                "parks" : "16",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "44", 
                     "49", 
@@ -6284,6 +6370,8 @@
                     "60621"
                 ], 
                 "ZIP": "60637", 
+                "parks" : "15",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "40", 
                     "41", 
@@ -6361,6 +6449,8 @@
                     "60621"
                 ], 
                 "ZIP": "60619", 
+                "parks" : "15",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "43", 
                     "44", 
@@ -6861,6 +6951,8 @@
                 ], 
                 "name": "60601, 60602, 60603, 60604, 60605 & 60611", 
                 "ZIP": "12311", 
+                "parks" : "18",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "32", 
                     "33", 
@@ -6945,6 +7037,8 @@
                 ], 
                 "name": "60606, 60607 & 60661", 
                 "ZIP": "6761", 
+                "parks" : "9",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "24", 
                     "28", 
@@ -7053,7 +7147,9 @@
                     "60622"
                 ], 
                 "name": "60610 & 60654", 
-                "ZIP": "60610", 
+                "ZIP": "60610",
+                "parks" : "6",
+                "schools" : "1",  
                 "adjacent_community_areas": [
                     "24", 
                     "32", 
@@ -7168,6 +7264,8 @@
                 ], 
                 "name": "60642 & 60622", 
                 "ZIP": "60622", 
+                "parks" : "12",
+                "schools" : "1", 
                 "adjacent_community_areas": [
                     "22", 
                     "23", 

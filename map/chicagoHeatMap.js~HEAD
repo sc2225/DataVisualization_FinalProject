@@ -2,9 +2,9 @@
 
 var heatMapVis = function(){
     var newHeatMap = {
-        drawMap: function(svg, bottom, minPrice, maxPrice, parks, schools){
+        drawMap: function(svg, bottom, top, data){
             
-            d3.json(/*"https://dhruvkore.github.io/DataVisualization_FinalProject/map/chicago.json"*/"chicago.json", function(json) {
+            d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/chicago.json", function(json) {
 
                 //Loads heat map data from csv -- will work with any CSV where zip is first column
                 d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-by-Zip-Chi.csv", function(data){
@@ -21,30 +21,6 @@ var heatMapVis = function(){
                         rentDict[data[d].zip] = data[d].MedGrossRent;
                     }
 
-                    var rating = function(/*minPrice, maxPrice, parks, minSAT, schools,*/ zipcodeData){
-                        var output = 0.0;
-                        var medRent = rentDict[zipcodeData.properties.ZIP];
-                        var avgSAT = SATdict[zipcodeData.properties.ZIP];
-                        if(minPrice > /*zipcodeData.MedGrossRent*/ medRent || 
-                            maxPrice < /*zipcodeData.MedGrossRent*/ medRent || 
-                            bottom > /*zipcodeData.avgSAT*/ avgSAT){
-                            return 0.0;
-                        }
-                        var value = 0.0;
-                        if(parks == 1){value += zipcodeData.properties.parks;}
-                        if(schools == 1){value += zipcodeData.properties.schools;}
-                        value += ( avgSAT * 10 / 2400 ); /* arbitrary multiplier of 10 */
-                        try{
-                            if(medRent != null && medRent > 0){
-                                output = value / medRent; /* Value per Dollar */
-                            }
-                        }
-                        catch(err){
-                            return 0.0;
-                        }
-                        return output;
-                    }
-
                     var maxSAT = Math.max(...sats);
                     var minSAT = Math.min(...sats);
 
@@ -56,8 +32,6 @@ var heatMapVis = function(){
                     console.log(`MIN SAT: ${minSAT}`)
                     console.log(`MAX RENT: ${maxRent}`)
                     console.log(`MIN RENT: ${minRent}`)
-
-                svg.selectAll(".path").remove();
 
                 // //Width and height
                 var width = +svg.attr("width");
@@ -100,19 +74,12 @@ var heatMapVis = function(){
                 .attr("id", function(d){
                     return d.properties.ZIP
                 })
-                .attr("class", "path")
-                .attr("rating", function(d){
-                    return rating(d);
-                })
                 .attr("sat", function(d){
                     return SATdict[d.properties.ZIP];
                 })
                 .attr("fill", function(d){
-                    var val = (rentDict[d.properties.ZIP]-minRent)/(maxRent - minRent);  //TODO: replace this rating function
-                    if(rentDict[d.properties.ZIP] > maxPrice || 
-                        rentDict[d.properties.ZIP] < minPrice ||
-                        SATdict[d.properties.ZIP] < bottom
-                        ){
+                    var val = (rentDict[d.properties.ZIP]-minRent)/(maxRent - minRent);
+                    if(SATdict[d.properties.ZIP] > top || SATdict[d.properties.ZIP] < bottom){
                         return 'rgb(150,150,150)'
                     }else{
                     var red = (0 * val);
