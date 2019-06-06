@@ -64,6 +64,15 @@ var heatMapVis = function(){
                         .attr("width", width)
                         .attr("height", height)
 
+                //Creates tool-tip box
+                var tool_tip = d3.tip()
+                    .attr("class", "d3-tip")
+                    .offset([20, 120])
+                    .html( "<p>Region:</p><div id='tipDiv'></div>"
+                    );
+
+                svg.call(tool_tip);
+
 
                 //Bind data and create one path per GeoJSON feature
                 svg.selectAll("path")
@@ -88,7 +97,38 @@ var heatMapVis = function(){
                     return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                     }
                 })
-                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
+
+
+                .on("mouseover", function(d) {
+                    tool_tip.show();
+                    var tipSVG = d3.select("#tipDiv")
+                    .append("svg")
+                    .attr("width", 150)
+                    .attr("height", 100);
+
+                    tipSVG.append("rect")
+                        .attr("fill", "steelblue")
+                        .attr("y", 10) //y position of the bar
+                        .attr("width", 0) //position of how far the bar starts at
+                        .attr("height", 20) //the thickness of the bar
+                        .transition() //facilitates the transition from empty canvas to bar
+                        .duration(1000) //how long it takes for the bar to move
+                        .attr("width", function() {
+                           return SATbarwidth(SATdict[d.properties.ZIP]);
+                        }); //length of the bar
+
+                tipSVG.append("text")
+                    .text(SATdict[d.properties.ZIP])
+                    .attr("x", 5)
+                    .attr("y", 30)
+                    .transition()
+                    .duration(1000)
+                    .attr("x", 6 + SATbarwidth(SATdict[d.properties.ZIP]))
+                })
+                .on('mouseout', tool_tip.hide)
+
+                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);}
+                   );
                 
 
             });
@@ -101,3 +141,14 @@ var heatMapVis = function(){
     }
     return newHeatMap;
 }
+
+//determines whether the SATScore is a valid number for the bar length
+function SATbarwidth(SATscore) {
+    if (SATscore === undefined || isNaN(SATscore) ) {
+        return 2;
+    }      
+    return SATscore *.1;
+}
+
+// if SAT is undefined, return empty bar with width 0
+// If SAT is null, return empty bar with width 0.

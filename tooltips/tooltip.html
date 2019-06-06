@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>  
+
+  <script src="https://d3js.org/d3.v4.js"></script>
+<!--   <script src="tooltip.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+</head>
+
+
+
+<style>
+.d3-tip {
+  line-height: 1;
+  padding: 6px;
+  background: wheat;
+  border-radius: 4px solid black;
+  font-size: 12px;
+}
+
+p {
+  font-family: Helvetica;
+}
+</style>
+
+<body>
+<p>Hover over the circles:</p>
+</body>
+
+<script>
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("width", 300)
+      .attr("height", 300);
+
+    var tool_tip = d3.tip()
+      .attr("class", "d3-tip")
+      .offset([20, 120])
+      .html("<p>This is a SVG inside a tooltip:</p><div id='tipDiv'></div>");
+
+    svg.call(tool_tip);
+
+    var data = [14, 27, 19, 6, 17];
+
+    var circles = svg.selectAll("foo")
+      .data(data)
+      .enter()
+      .append("circle");
+
+    circles.attr("cx", 50)
+      .attr("cy", function(d, i) {
+        return 20 + 50 * i
+      })
+      .attr("r", function(d) {
+        return d
+      })
+      .attr("fill", "teal")
+
+
+      .on('mouseover', function(d) {
+            
+            tool_tip.show();
+            var tipSVG = d3.select("#tipDiv")
+              .append("svg")
+              .attr("width", 200)
+              .attr("height", 100);
+
+            tipSVG.append("rect")
+              .attr("fill", "steelblue")
+              .attr("y", 10) //y position of the bar
+              .attr("width", 0) //position of how far the bar starts at
+              .attr("height", 20) //the thickness of the bar
+              .transition() //facilitates the transition from empty canvas to bar
+              .duration(1000) //how long it takes for the bar to move
+              .attr("width", d * 6); //length of the bar
+
+            tipSVG.append("text")
+              .text(d)
+              .attr("x", 10)
+              .attr("y", 30)
+              .transition()
+              .duration(1000)
+              .attr("x", 6 + d * 6) //the location of the text is at the end of the bar
+      })
+      .on('mouseout', tool_tip.hide);
+</script>
+</html>
+
