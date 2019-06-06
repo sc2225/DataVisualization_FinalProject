@@ -67,12 +67,12 @@ var heatMapVis = function(){
                         .attr("width", width)
                         .attr("height", height)
 
-                //Creates tool-tip box
+                //Creates tool-tip 
                 var tool_tip = d3.tip()
                     .attr("class", "d3-tip")
                     .offset([20, 120])
                     .html(
-                         "<p id='region'></p><div id='tipDiv'></div>"
+                         "<p id='region'></p><div id='tipDiv'><p>Averages:</p></div><div id='tipRent'></div>"
                     );
 
                 svg.call(tool_tip);
@@ -116,33 +116,58 @@ var heatMapVis = function(){
                     .attr("width", 150)
                     .attr("height", 100);
 
+                    var tiprent = d3.select("#tipDiv").select("svg");
+                 
+                   
+
+                // For SATS score bar:
                     tipSVG.append("rect")
                         .attr("fill", "steelblue")
-                        .attr("y", 10) //y position of the bar
+                        .attr("y", 0) //y position of the bar
                         .attr("width", 0) //position of how far the bar starts at
                         .attr("height", 20) //the thickness of the bar
                         .transition() //facilitates the transition from empty canvas to bar
-                        .duration(1000) //how long it takes for the bar to move
+                        .duration(900) //how long it takes for the bar to move
                         .attr("width", function() {
-                            console.log(rentDict[d.properties.ZIP]);
-                           return SATbarwidth(SATdict[d.properties.ZIP]);
-                        }); //length of the bar
+                          
+                           return barwidth(SATdict[d.properties.ZIP]);
+                        }); 
+
 
                     tipSVG.append("text")
-                        .text(SATdict[d.properties.ZIP])
+                        .text("SAT Score: " + SATdict[d.properties.ZIP])
                         .attr("x", 5)
-                        .attr("y", 30)
+                        .attr("y", 19)
                         .transition()
                         .duration(1000)
-                        .attr("x", 6 + SATbarwidth(SATdict[d.properties.ZIP]))
+                        .attr("x", 3)
+
+                // For Rent Bar:  
+                    tiprent.append("rect")
+                        .attr("fill", "red")
+                        .attr("y", 20)
+                        .attr("width", 0)
+                        .attr("height", 20) 
+                        .transition() 
+                        .duration(900) 
+                        .attr("width", function() {
+                           return barwidth(rentDict[d.properties.ZIP]);
+                        }); 
+                    tipSVG.append("text")
+                        .text("Rent Price: " + rentDict[d.properties.ZIP])
+                        .attr("x", 5)
+                        .attr("y", 40)
+                        .transition()
+                        .duration(1000)
+                        .attr("x", 3)
+
+
                 })
                 .on('mouseout', tool_tip.hide)
 
-                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);}
-                   );
-                
-
-            });
+                //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
+        
+                });
             });
         },
 
@@ -152,19 +177,10 @@ var heatMapVis = function(){
 }
 
 //determines whether the SATScore is a valid number for the bar length
-function SATbarwidth(SATscore) {
-    if (SATscore === undefined || isNaN(SATscore) ) {
-        return 2;
+function barwidth(value) {
+    if (value === undefined || isNaN(value) ) {
+        return 0;
     }      
-    return SATscore *.1;
+    return value *.1;
 }
 
-// given value, create the text for tooltips
-function tipsText(value) {
-
-}
-
-
-
-// if SAT is undefined, return empty bar with width 0
-// If SAT is null, return empty bar with width 0.
