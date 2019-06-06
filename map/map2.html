@@ -5,10 +5,21 @@
   stroke: steelblue;
   /* fill: #FFF; */
 }
+/*
+tooltip styling*/
+.d3-tip {
+  line-height: 1;
+  padding: 6px;
+  background: rgba(188, 224, 224, 0.74);
+  border-radius: 4px solid black;
+  font-size: 12px;
+}
 </style>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="chicagoHeatMap.js"></script>
+<!-- script needed for making tooltips: -->
+<script src="d3-tooltips.js"></script> 
 <!-- <script src="Avg-SAT-by-Zip-Chi.csv.js"></script> -->
 <body>
   <svg id="chart" width="900" height="450"></svg>
@@ -26,6 +37,7 @@ var satSvg = d3.select("#SAT")
 
     HM.dispatch.on("selected",
                         function(d){
+                          console.log(d);
                           console.log(`AVG sat is: ${d}`);
                         });
 

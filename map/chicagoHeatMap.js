@@ -10,6 +10,7 @@ var heatMapVis = function(){
                 d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-by-Zip-Chi.csv", function(data){
                     var SATdict = {};
                     var rentDict={};
+                    var zipcode = {};
                     
                     var sats = [];
                     var rents = [];
@@ -19,6 +20,8 @@ var heatMapVis = function(){
                         rents.push(data[d].MedGrossRent)
                         SATdict[data[d].zip] = data[d].avgSAT;
                         rentDict[data[d].zip] = data[d].MedGrossRent;
+                        zipcode[data[d].zip] = data[d].zip;
+
                     }
 
                     var rating = function(/*minPrice, maxPrice, parks, minSAT, schools,*/ zipcodeData){
@@ -90,6 +93,16 @@ var heatMapVis = function(){
                         .attr("width", width)
                         .attr("height", height)
 
+                //Creates tool-tip 
+                var tool_tip = d3.tip()
+                    .attr("class", "d3-tip")
+                    .offset([20, 120])
+                    .html(
+                         "<p id='region'></p><div id='tipDiv'><p>Averages:</p></div><div id='tipRent'></div>"
+                    );
+
+                svg.call(tool_tip);
+
 
                 //Bind data and create one path per GeoJSON feature
                 svg.selectAll("path")
@@ -121,12 +134,73 @@ var heatMapVis = function(){
                     return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                     }
                 })
-                .on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
-                
 
-            });
-                
 
+                .on("mouseover", function(d) {
+                    tool_tip.show();
+
+                    d3.select("p#region")
+                        .append("text")
+                        .text("Neighborhood: " + zipcode[d.properties.ZIP]);
+
+
+                    var tipSVG = d3.select("#tipDiv")
+                    .append("svg")
+                    .attr("width", 150)
+                    .attr("height", 100);
+
+                    var tiprent = d3.select("#tipDiv").select("svg");
+                 
+                   
+
+                // For SATS score bar:
+                    tipSVG.append("rect")
+                        .attr("fill", "steelblue")
+                        .attr("y", 0) //y position of the bar
+                        .attr("width", 0) //position of how far the bar starts at
+                        .attr("height", 20) //the thickness of the bar
+                        .transition() //facilitates the transition from empty canvas to bar
+                        .duration(900) //how long it takes for the bar to move
+                        .attr("width", function() {
+                          
+                           return barwidth(SATdict[d.properties.ZIP]);
+                        }); 
+
+
+                    tipSVG.append("text")
+                        .text("SAT Score: " + SATdict[d.properties.ZIP])
+                        .attr("x", 5)
+                        .attr("y", 19)
+                        .transition()
+                        .duration(1000)
+                        .attr("x", 3)
+
+                // For Rent Bar:  
+                    tiprent.append("rect")
+                        .attr("fill", "red")
+                        .attr("y", 20)
+                        .attr("width", 0)
+                        .attr("height", 20) 
+                        .transition() 
+                        .duration(900) 
+                        .attr("width", function() {
+                           return barwidth(rentDict[d.properties.ZIP]);
+                        }); 
+                    tipSVG.append("text")
+                        .text("Rent Price: " + rentDict[d.properties.ZIP])
+                        .attr("x", 5)
+                        .attr("y", 40)
+                        .transition()
+                        .duration(1000)
+                        .attr("x", 3)
+
+
+                })
+                .on('mouseout', tool_tip.hide)
+
+                //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
+        
+                });
             });
         },
 
@@ -134,3 +208,12 @@ var heatMapVis = function(){
     }
     return newHeatMap;
 }
+
+//determines whether the SATScore is a valid number for the bar length
+function barwidth(value) {
+    if (value === undefined || isNaN(value) ) {
+        return 0;
+    }      
+    return value *.1;
+}
+
