@@ -36,7 +36,8 @@ var heatMapVis = function(){
                         var value = 0.0;
                         if(parks == 1){value += zipcodeData.properties.parks;}
                         if(schools == 1){value += zipcodeData.properties.schools;}
-                        value += ( avgSAT * 10 / 2400 ); /* arbitrary multiplier of 10 */
+                        if(avgSAT !== "null"){
+                        value += ( avgSAT * 10 / 2400 );} /* arbitrary multiplier of 10 */
                         try{
                             if(medRent != null && medRent > 0){
                                 output = value / medRent; /* Value per Dollar */
@@ -121,7 +122,7 @@ var heatMapVis = function(){
                     return SATdict[d.properties.ZIP];
                 })
                 .attr("fill", function(d){
-                    var val = (rentDict[d.properties.ZIP]-minRent)/(maxRent - minRent);  //TODO: replace this rating function
+                    var val = rating(d) *100; //TODO: replace this rating function
                     if(rentDict[d.properties.ZIP] > maxPrice || 
                         rentDict[d.properties.ZIP] < minPrice ||
                         SATdict[d.properties.ZIP] < bottom
