@@ -1,23 +1,112 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<html>
+  <head>
+	<script src="https://d3js.org/d3.v5.min.js"></script>
+	<script src="https://unpkg.com/d3-simple-slider"></script>
+	<script src="../filters/filters.js"></script>
+
+	<link
+	  rel="stylesheet"
+	  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	  crossorigin="anonymous"
+	/>
+
+	<link rel="stylesheet" type="text/css" href="../filters/filters.css"/>
 <style>
 .zipcode {
   stroke: steelblue;
   /* fill: #FFF; */
 }
+/*
+tooltip styling*/
+.d3-tip {
+  line-height: 1;
+  padding: 6px;
+  background: rgba(188, 224, 224, 0.74);
+  border-radius: 4px solid black;
+  font-size: 12px;
+}
 </style>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="chicagoHeatMap.js"></script>
+<!-- script needed for making tooltips: -->
+<script src="d3-tooltips.js"></script> 
+<!-- <script src="Avg-SAT-by-Zip-Chi.csv.js"></script> -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <body>
-  <svg id="chart" width="900" height="450"></svg>
+  <div class="row" style="padding: 20px;">
+    
+    <div class="ui-box" style='border-style: solid; border-width: 2px; width: 370px; border-color: #a3a3a3' >
+        <div class="priceRange">
+          <h6 align="center">Price Range</h6>
+          <p id="value-range"></p>
+        </div>
+  
+        <div class="col-sm">
+          <div id="slider-range">
+          </div>
+        </div>
+  
+        <div class="SATSlider">
+          <h6 align="center">SAT Score Range</h6>
+          <p id ="SATtext"></p>
+        </div>
+  
+        <div class="SAT-slider">
+          <div id="SAT-range">
+          </div>
+        </div>
+  
+  
+      
+        <!-- The checkbox amenitites -->
+        <div class="check-boxes" >	
+          <h6 align="center">Amenities</h6>
+          <label class ="container">Parks
+            <input type="checkbox" class="myCheckbox" value="parks"/> 
+            <span class="checkmark"></span>
+          </label>
+           <label class ="container">Police Stations
+             <input type="checkbox" class="myCheckbox" value="police"> 
+             <span class="checkmark"></span>
+           </label>
+           <label class ="container">Schools
+             <input type="checkbox" class="myCheckbox" value="schools">
+             <span class="checkmark"></span>
+           </label>
+           <label class ="container">Health Clinics
+             <input type="checkbox" class="myCheckbox" value="health-clinics">	
+             <span class="checkmark"></span>
+           </label>
+        </div>
+      
+    </div>
+
+    <div >
+        <svg id="chart" width="700" height="450"></svg>
+      </div>
+  </div>
+    
 </body>
 <script>
 
+
+
 var chartSvg = d3.select("#chart")
+var satSvg = d3.select("#SAT")
 
     var HM = heatMapVis();
-    HM.drawMap(chartSvg, .25, .9)
+    HM.drawMap(chartSvg, 400, 0, 3000, 0, 0)
+
+    HM.dispatch.on("selected",
+                        function(d){
+                          console.log(d);
+                          console.log(`AVG sat is: ${d}`);
+                        });
+
 
 
   /*
@@ -25,6 +114,53 @@ var chartSvg = d3.select("#chart")
   lots of help from http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
   */
 
+  //NOTE: To get current range, use "pricerange" array.
+		//  	To get current checked boxes, use "checked" array.
+		//		To get current SAT range, use "SATrange"
+
+		var checked = []; 
+		var pricerange = []; 
+		var SATrange = []; 
+
+
+		myText = d3.select(".ui-box")
+			.append("text")
+			.attr('font-size', '12')
+			.attr('id', "textline")
+  			;
+
+
+		var gRange = d3
+		   .select('div#slider-range')
+		   .append('svg')
+		   .attr('width', 500)
+		   .attr('height', 90)
+		   .append('g')
+		   .attr('transform', 'translate(30,30)');
+
+		 gRange.call(sliderRange);
+
+		init_priceText(); 
+
+
+		//on click event handling for checkboxes
+		d3.selectAll(".myCheckbox")
+			.on("change", update);
+
+
+		var gRangeSAT = d3
+		   .select('div#SAT-range')
+		   .append('svg')
+		   .attr('width', 500)
+		   .attr('height', 90)
+		   .append('g')
+		   .attr('transform', 'translate(30,30)');
+
+		gRangeSAT.call(sliderRangeSAT);
+
+		init_SATtext();
+
+
 </script>
 
-
+</html>
