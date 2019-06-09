@@ -35,7 +35,6 @@ tooltip styling*/
 <script src="d3-tooltips.js"></script> 
 <!-- <script src="Avg-SAT-by-Zip-Chi.csv.js"></script> -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
 <body>
   <div class="row" style="padding: 20px;">
@@ -83,7 +82,7 @@ tooltip styling*/
              <span class="checkmark"></span>
            </label>
         </div>
-      <button type="button" onclick="">Done</button>
+      <button type="button" onclick="getData()">Done</button>
     </div>
 
     <div >
@@ -145,11 +144,11 @@ tooltip styling*/
 		.attr('transform', 'translate(30,30)');
 
 
-	var checked = []; 
-	var pricerange = []; 
-	var minPrice = null;
-	var maxPrice =null;
-	var SATrange = []; 
+	// var checked = []; 
+	// var pricerange = []; 
+	// var minPrice = null;
+	// var maxPrice =null;
+	// var SATrange = []; 
 	   
 
 		//Code for price slider:
@@ -166,9 +165,9 @@ tooltip styling*/
 		    d3.select('p#value-range')
 		      .text("From " + val.map(d3.format('.02s'))
 		      .join(' to '))
-		     var pricerange = val.map(d3.format('.2r'));
-		     minPrice = +pricerange[0];
-		     maxPrice = +pricerange[1];
+		     // var pricerange = val.map(d3.format('.2r'));
+		     // minPrice = +pricerange[0];
+		     // maxPrice = +pricerange[1];
 		});
 
 		 gRange.call(sliderRange);
@@ -188,7 +187,7 @@ tooltip styling*/
 		      d3.select('p#SATtext')
 		      	.text("From " + val.map(d3.format('.3r'))
 		      	.join(' to '))
-		      	SATrange = val.map(d3.format('.3r'));
+		      	// SATrange = val.map(d3.format('.3r'));
 		    });
 
 
@@ -212,6 +211,24 @@ tooltip styling*/
 
 	function updateChecks() {
 
+	}
+
+	function getData(){
+
+		var parks = 0;
+		var schools = 0;
+
+		var minPrice =sliderRange.value().map(d3.format('.2r'))[0];
+		var maxPrice =sliderRange.value().map(d3.format('.2r'))[1];
+		
+		var minSAT = sliderRangeSAT.value().map(d3.format('.3r'))[0];
+		var maxSAT = sliderRangeSAT.value().map(d3.format('.3r'))[1];
+		
+		var checkArr = update();
+
+		checkArr.includes("parks") ? parks = 1 : parks = 0;
+		checkArr.includes("schools") ? schools = 1 : schools = 0;
+		console.log(parks);
 	}
 
 
