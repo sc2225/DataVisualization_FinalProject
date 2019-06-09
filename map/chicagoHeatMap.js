@@ -200,7 +200,30 @@ var heatMapVis = function(){
                 .on('mouseout', tool_tip.hide)
 
                 //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
-        
+                .on("click", function(d){
+                    console.log(d);
+                    console.log(`AVG sat is: ${d.properties.ZIP}`);
+
+                    if(clickCount == 1){
+                        drawBarChart(d3.select("p#barTitle"), 
+                            d3.select("#barChart"), 
+                            zipcode, 
+                            d, 
+                            SATdict, 
+                            rentDict)
+                        clickCount = 0
+                    }
+                    else{
+                        drawBarChart(d3.select("p#secondBarTitle"), 
+                            d3.select("#secondBarChart"), 
+                            zipcode, 
+                            d, 
+                            SATdict, 
+                            rentDict)
+                        clickCount = 1
+                    }
+                })
+
                 });
             });
         },
@@ -209,6 +232,8 @@ var heatMapVis = function(){
     }
     return newHeatMap;
 }
+
+var clickCount = 1;
 
 //determines whether the SATScore is a valid number for the bar length
 function barwidth(value) {
