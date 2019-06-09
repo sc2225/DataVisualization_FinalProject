@@ -128,7 +128,7 @@ d3.csv("Avg-SAT-by-Zip-Chi.csv", function(error, data) {
       .attr("r", 3.5)
       .attr("cx", xMap)
       .attr("cy", yMap)
-      .style("fill", function(d) { return color(cValue(d));}) 
+      .style("fill", "rgba(0, 150, 0, 0.8)") 
       .on("mouseover", function(d) {
           tooltip.transition()
                .duration(200)
