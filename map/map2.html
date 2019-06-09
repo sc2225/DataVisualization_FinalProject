@@ -83,7 +83,7 @@ tooltip styling*/
              <span class="checkmark"></span>
            </label>
         </div>
-      
+      <button type="button" onclick="">Done</button>
     </div>
 
     <div >
@@ -98,14 +98,14 @@ tooltip styling*/
 	var satSvg = d3.select("#SAT")
 
 //initialize the heat map to default settings:
-	var initPrice = sliderRange.value().map(d3.format('.2r'));
-	var initMinPrice = +initPrice[0]; 
-	var initMaxPrice = +initPrice[1];
+	// var initPrice = sliderRange.value().map(d3.format('.2r'));
+	// var initMinPrice = +initPrice[0]; 
+	// var initMaxPrice = +initPrice[1];
 
-	var initSAT = sliderRangeSAT.value().map(d3.format('.3r'));
-	var initSATmin = +initSAT[0];
-	var initSATmax = +initSAT[1];
-	console.log(initMinPrice);
+	// var initSAT = sliderRangeSAT.value().map(d3.format('.3r'));
+	// var initSATmin = +initSAT[0];
+	// var initSATmax = +initSAT[1];
+	// console.log(initMinPrice);
 
 	var HM = heatMapVis();
 	HM.drawMap(chartSvg, 400, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
