@@ -31,6 +31,7 @@ tooltip styling*/
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="chicagoHeatMap.js"></script>
+<script src="barChart.js"></script>
 <!-- script needed for making tooltips: -->
 <script src="d3-tooltips.js"></script> 
 <!-- <script src="Avg-SAT-by-Zip-Chi.csv.js"></script> -->
@@ -87,7 +88,13 @@ tooltip styling*/
 
     <div >
         <svg id="chart" width="700" height="450"></svg>
-      </div>
+    </div>
+    <div style='border-style: solid; border-width: 2px; width: 200px; height: 230px; border-color: #a3a3a3'>
+      <p id='barTitle'></p>
+      <svg id="barChart" width="200" height="100"></svg>
+      <p id='secondBarTitle'></p>
+      <svg id="secondBarChart" width="200" height="100"></svg>
+    </div>
   </div>
     
 </body>
