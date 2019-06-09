@@ -94,19 +94,27 @@ tooltip styling*/
 </body>
 <script>
 
+	var chartSvg = d3.select("#chart")
+	var satSvg = d3.select("#SAT")
 
+//initialize the heat map to default settings:
+	var initPrice = sliderRange.value().map(d3.format('.2r'));
+	var initMinPrice = +initPrice[0]; 
+	var initMaxPrice = +initPrice[1];
 
-var chartSvg = d3.select("#chart")
-var satSvg = d3.select("#SAT")
+	var initSAT = sliderRangeSAT.value().map(d3.format('.3r'));
+	var initSATmin = +initSAT[0];
+	var initSATmax = +initSAT[1];
+	console.log(initMinPrice);
 
-    var HM = heatMapVis();
-    HM.drawMap(chartSvg, 400, 0, 3000, 0, 0)
+	var HM = heatMapVis();
+	HM.drawMap(chartSvg, 400, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
 
-    HM.dispatch.on("selected",
-                        function(d){
-                          console.log(d);
-                          console.log(`AVG sat is: ${d}`);
-                        });
+	HM.dispatch.on("selected",
+  		function(d){
+        	console.log(d);
+        	console.log(`AVG sat is: ${d}`);
+    	});
 
 
 
@@ -119,29 +127,69 @@ var satSvg = d3.select("#SAT")
 		//  	To get current checked boxes, use "checked" array.
 		//		To get current SAT range, use "SATrange"
 
-		var checked = []; 
-		var pricerange = []; 
-		var SATrange = []; 
 
 
-		myText = d3.select(".ui-box")
-			.append("text")
-			.attr('font-size', '12')
-			.attr('id', "textline")
-  			;
+	myText = d3.select(".ui-box")
+		.append("text")
+		.attr('font-size', '12')
+		.attr('id', "textline")
+  		;
 
 
-		var gRange = d3
-		   .select('div#slider-range')
-		   .append('svg')
-		   .attr('width', 500)
-		   .attr('height', 90)
-		   .append('g')
-		   .attr('transform', 'translate(30,30)');
+	var gRange = d3
+		.select('div#slider-range')
+		.append('svg')
+		.attr('width', 500)
+		.attr('height', 90)
+		.append('g')
+		.attr('transform', 'translate(30,30)');
+
+
+	var checked = []; 
+	var pricerange = []; 
+	var minPrice = null;
+	var maxPrice =null;
+	var SATrange = []; 
+	   
+
+		//Code for price slider:
+	var sliderRange = d3
+	 	.sliderBottom()
+		.min(d3.min(dataSlider))
+		.max(d3.max(dataSlider))
+		.width(250)
+	    .tickFormat(d3.format('.02s'))
+	    .ticks(5)
+	    .default([2000, 2500])
+	    .fill('#2196f3')
+	    .on('onchange', val => {
+		    d3.select('p#value-range')
+		      .text("From " + val.map(d3.format('.02s'))
+		      .join(' to '))
+		     var pricerange = val.map(d3.format('.2r'));
+		     minPrice = +pricerange[0];
+		     maxPrice = +pricerange[1];
+		});
 
 		 gRange.call(sliderRange);
 
 		init_priceText(); 
+
+			var sliderRangeSAT = d3
+		   .sliderBottom()
+		   .min(d3.min(dataSliderSAT))
+		   .max(d3.max(dataSliderSAT))
+		   .width(250)
+	       .tickFormat(d3.format('0'))
+	       .ticks(5)
+	       .default([1000, 1300])
+	       .fill('#2196f3')
+	       .on('onchange', val => {
+		      d3.select('p#SATtext')
+		      	.text("From " + val.map(d3.format('.3r'))
+		      	.join(' to '))
+		      	SATrange = val.map(d3.format('.3r'));
+		    });
 
 
 		//on click event handling for checkboxes
@@ -160,6 +208,11 @@ var satSvg = d3.select("#SAT")
 		gRangeSAT.call(sliderRangeSAT);
 
 		init_SATtext();
+
+
+	function updateChecks() {
+
+	}
 
 
 </script>
