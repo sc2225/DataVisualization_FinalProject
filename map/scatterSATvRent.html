@@ -83,7 +83,7 @@ var tooltip = d3.select("body").append("div")
     .style("opacity", 0);
 
 // load data
-d3.csv("Avg-SAT-by-Zip-Chi.csv", function(error, data) {
+d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-by-Zip-Chi.csv", function(error, data) {
 
   // change string (from CSV) into number format
   data.forEach(function(d) {
