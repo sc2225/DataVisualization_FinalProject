@@ -106,7 +106,7 @@ tooltip styling*/
 	// var initSATmax = +initSAT[1];
 	// console.log(initMinPrice);
 
-	var HM = heatMapVis();
+    var HM = heatMapVis();
 	HM.drawMap(chartSvg, 400, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
 
 	HM.dispatch.on("selected",
@@ -115,25 +115,10 @@ tooltip styling*/
         	console.log(`AVG sat is: ${d}`);
     	});
 
-
-
-  /*
-  data comes from: https://github.com/smartchicago/chicago-atlas/blob/master/db/import/zipcodes.geojson
-  lots of help from http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
-  */
-
-  //NOTE: To get current range, use "pricerange" array.
-		//  	To get current checked boxes, use "checked" array.
-		//		To get current SAT range, use "SATrange"
-
-
-
 	myText = d3.select(".ui-box")
 		.append("text")
 		.attr('font-size', '12')
-		.attr('id', "textline")
-  		;
-
+		.attr('id', "textline");
 
 	var gRange = d3
 		.select('div#slider-range')
@@ -142,13 +127,6 @@ tooltip styling*/
 		.attr('height', 90)
 		.append('g')
 		.attr('transform', 'translate(30,30)');
-
-
-	// var checked = []; 
-	// var pricerange = []; 
-	// var minPrice = null;
-	// var maxPrice =null;
-	// var SATrange = []; 
 	   
 
 		//Code for price slider:
@@ -208,11 +186,6 @@ tooltip styling*/
 
 		init_SATtext();
 
-
-	function updateChecks() {
-
-	}
-
 	function getData(){
 
 		var parks = 0;
@@ -228,9 +201,17 @@ tooltip styling*/
 
 		checkArr.includes("parks") ? parks = 1 : parks = 0;
 		checkArr.includes("schools") ? schools = 1 : schools = 0;
-		console.log(parks);
+
+		var reMap = heatMapVis();
+		
+		reMap.drawMap(chartSvg, 400, minPrice, maxPrice, parks, schools) /*svg, sat-min, minprice, maxprice, parks, schools*/
 	}
 
+
+  /*
+  data comes from: https://github.com/smartchicago/chicago-atlas/blob/master/db/import/zipcodes.geojson
+  lots of help from http://stackoverflow.com/questions/14492284/center-a-map-in-d3-given-a-geojson-object
+  */
 
 </script>
 
