@@ -201,8 +201,6 @@ var heatMapVis = function(){
                     .on('mouseout', function(d){
                         tool_tip.hide()
                     })
-
-                    //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
                     .on("click", function(d){
                         
                         console.log(d);
