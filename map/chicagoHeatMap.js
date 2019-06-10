@@ -2,7 +2,7 @@
 
 var heatMapVis = function(){
     var newHeatMap = {
-        drawMap: function(svg, bottom, minPrice, maxPrice, parks, schools){
+        drawMap: function(svg, bottom, minPrice, maxPrice, parks, schools, hasTooltip){
             
             d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/chicago.json"/*"chicago.json"*/, function(json) {
 
@@ -34,8 +34,8 @@ var heatMapVis = function(){
                             return 0.0;
                         }
                         var value = 0.0;
-                        if(parks == 1){value += zipcodeData.properties.parks;}
-                        if(schools == 1){value += zipcodeData.properties.schools;}
+                        if(parks == 1){value += (zipcodeData.properties.parks / 10);}
+                        if(schools == 1){value += zipcodeData.properties.schools / 5;}
                         if(avgSAT !== "null"){
                         value += ( avgSAT * 10 / 2400 );} /* arbitrary multiplier of 10 */
                         try{
@@ -104,126 +104,162 @@ var heatMapVis = function(){
 
                 svg.call(tool_tip);
 
+                console.log("hasTooltip: " + hasTooltip)
 
-                //Bind data and create one path per GeoJSON feature
-                svg.selectAll("path")
-                .data(json.features)
-                .enter()
-                .append("path")
-                .attr("d", path)
-                .attr("id", function(d){
-                    return d.properties.ZIP
-                })
-                .attr("class", "path")
-                .attr("rating", function(d){
-                    return rating(d);
-                })
-                .attr("sat", function(d){
-                    return SATdict[d.properties.ZIP];
-                })
-                .attr("fill", function(d){
-                    var val = rating(d) *100; //TODO: replace this rating function
-                    if(rentDict[d.properties.ZIP] > maxPrice || 
-                        rentDict[d.properties.ZIP] < minPrice ||
-                        SATdict[d.properties.ZIP] < bottom
-                        ){
-                        return 'rgb(150,150,150)'
-                    }else{
-                    var red = (0 * val);
-                    var blue = (0 * val);
-                    var green = (255 * val);
-                    return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
-                    }
-                })
-
-
-                .on("mouseover", function(d) {
-                    tool_tip.show();
-
-                    d3.select("p#region")
-                        .append("text")
-                        .text("Neighborhood: " + zipcode[d.properties.ZIP]);
+                if(hasTooltip == 1){
+                    //Bind data and create one path per GeoJSON feature
+                    svg.selectAll("path")
+                    .data(json.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", path)
+                    .attr("id", function(d){
+                        return d.properties.ZIP
+                    })
+                    .attr("class", "path")
+                    .attr("rating", function(d){
+                        return rating(d);
+                    })
+                    .attr("sat", function(d){
+                        return SATdict[d.properties.ZIP];
+                    })
+                    .attr("fill", function(d){
+                        var val = rating(d) *100; //TODO: replace this rating function
+                        if(rentDict[d.properties.ZIP] > maxPrice || 
+                            rentDict[d.properties.ZIP] < minPrice ||
+                            SATdict[d.properties.ZIP] < bottom
+                            ){
+                            return 'rgb(150,150,150)'
+                        }else{
+                        var red = (0 * val);
+                        var blue = (0 * val);
+                        var green = (255 * val);
+                        return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
+                        }
+                    })
 
 
-                    var tipSVG = d3.select("#tipDiv")
-                    .append("svg")
-                    .attr("width", 150)
-                    .attr("height", 100);
+                    .on("mouseover", function(d) {
+                            tool_tip.show();
 
-                    var tiprent = d3.select("#tipDiv").select("svg");
-                 
-                   
-
-                // For SATS score bar:
-                    tipSVG.append("rect")
-                        .attr("fill", "steelblue")
-                        .attr("y", 0) //y position of the bar
-                        .attr("width", 0) //position of how far the bar starts at
-                        .attr("height", 20) //the thickness of the bar
-                        .transition() //facilitates the transition from empty canvas to bar
-                        .duration(900) //how long it takes for the bar to move
-                        .attr("width", function() {
-                          
-                           return barwidth(SATdict[d.properties.ZIP]);
-                        }); 
+                            d3.select("p#region")
+                                .append("text")
+                                .text("Neighborhood: " + zipcode[d.properties.ZIP]);
 
 
-                    tipSVG.append("text")
-                        .text("SAT Score: " + SATdict[d.properties.ZIP])
-                        .attr("x", 5)
-                        .attr("y", 19)
-                        .transition()
-                        .duration(1000)
-                        .attr("x", 3)
+                            var tipSVG = d3.select("#tipDiv")
+                            .append("svg")
+                            .attr("width", 150)
+                            .attr("height", 100);
 
-                // For Rent Bar:  
-                    tiprent.append("rect")
-                        .attr("fill", "red")
-                        .attr("y", 20)
-                        .attr("width", 0)
-                        .attr("height", 20) 
-                        .transition() 
-                        .duration(900) 
-                        .attr("width", function() {
-                           return barwidth(rentDict[d.properties.ZIP]);
-                        }); 
-                    tipSVG.append("text")
-                        .text("Rent Price: " + rentDict[d.properties.ZIP])
-                        .attr("x", 5)
-                        .attr("y", 40)
-                        .transition()
-                        .duration(1000)
-                        .attr("x", 3)
+                            var tiprent = d3.select("#tipDiv").select("svg");
+                         
+                           
+
+                        // For SATS score bar:
+                            tipSVG.append("rect")
+                                .attr("fill", "steelblue")
+                                .attr("y", 0) //y position of the bar
+                                .attr("width", 0) //position of how far the bar starts at
+                                .attr("height", 20) //the thickness of the bar
+                                .transition() //facilitates the transition from empty canvas to bar
+                                .duration(900) //how long it takes for the bar to move
+                                .attr("width", function() {
+                                  
+                                   return barwidth(SATdict[d.properties.ZIP]);
+                                }); 
 
 
-                })
-                .on('mouseout', tool_tip.hide)
+                            tipSVG.append("text")
+                                .text("SAT Score: " + SATdict[d.properties.ZIP])
+                                .attr("x", 5)
+                                .attr("y", 19)
+                                .transition()
+                                .duration(1000)
+                                .attr("x", 3)
 
-                //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
-                .on("click", function(d){
-                    console.log(d);
-                    console.log(`AVG sat is: ${d.properties.ZIP}`);
+                        // For Rent Bar:  
+                            tiprent.append("rect")
+                                .attr("fill", "red")
+                                .attr("y", 20)
+                                .attr("width", 0)
+                                .attr("height", 20) 
+                                .transition() 
+                                .duration(900) 
+                                .attr("width", function() {
+                                   return barwidth(rentDict[d.properties.ZIP]);
+                                }); 
+                            tipSVG.append("text")
+                                .text("Rent Price: " + rentDict[d.properties.ZIP])
+                                .attr("x", 5)
+                                .attr("y", 40)
+                                .transition()
+                                .duration(1000)
+                                .attr("x", 3)
 
-                    if(clickCount == 1){
-                        drawBarChart(d3.select("p#barTitle"), 
-                            d3.select("#barChart"), 
-                            zipcode, 
-                            d, 
-                            SATdict, 
-                            rentDict)
-                        clickCount = 0
-                    }
-                    else{
-                        drawBarChart(d3.select("p#secondBarTitle"), 
-                            d3.select("#secondBarChart"), 
-                            zipcode, 
-                            d, 
-                            SATdict, 
-                            rentDict)
-                        clickCount = 1
-                    }
-                })
+                    })
+                    .on('mouseout', function(d){
+                        tool_tip.hide()
+                    })
 
+                    //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
+                    .on("click", function(d){
+                        
+                        console.log(d);
+                        console.log(`AVG sat is: ${d.properties.ZIP}`);
+
+                        if(clickCount == 1){
+                            drawBarChart(d3.select("p#barTitle"), 
+                                d3.select("#barChart"), 
+                                zipcode, 
+                                d, 
+                                SATdict, 
+                                rentDict)
+                            clickCount = 0
+                        }
+                        else{
+                            drawBarChart(d3.select("p#secondBarTitle"), 
+                                d3.select("#secondBarChart"), 
+                                zipcode, 
+                                d, 
+                                SATdict, 
+                                rentDict)
+                            clickCount = 1
+                        }
+                    })
+                }
+                else{
+                    //Bind data and create one path per GeoJSON feature
+                    svg.selectAll("path")
+                    .data(json.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", path)
+                    .attr("id", function(d){
+                        return d.properties.ZIP
+                    })
+                    .attr("class", "path")
+                    .attr("rating", function(d){
+                        return rating(d);
+                    })
+                    .attr("sat", function(d){
+                        return SATdict[d.properties.ZIP];
+                    })
+                    .attr("fill", function(d){
+                        var val = rating(d) *100; //TODO: replace this rating function
+                        if(rentDict[d.properties.ZIP] > maxPrice || 
+                            rentDict[d.properties.ZIP] < minPrice ||
+                            SATdict[d.properties.ZIP] < bottom
+                            ){
+                            return 'rgb(150,150,150)'
+                        }else{
+                        var red = (0 * val);
+                        var blue = (0 * val);
+                        var green = (255 * val);
+                        return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
+                        }
+                    })
+                }
                 });
             });
         },
