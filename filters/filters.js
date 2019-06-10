@@ -1,6 +1,6 @@
 
 	function init_priceText() {
-		d3.select('p#value-range').text("From " + sliderRange
+		d3.select('div#value-range').text("From " + sliderRange
 		  	.value()
 		   	.map(d3.format('.02s'))
 		   	.join(' to ')
@@ -8,7 +8,7 @@
 	}
 	//Configues the price range text above slider only at initialization
 	function init_SATtext() {
-		d3.select('p#SATtext').text("From " + sliderRangeSAT
+		d3.select('div#SATtext').text("From " + sliderRangeSAT
 		   .value()
 		   .map(d3.format('.3r'))
 		   .join(' to ')
