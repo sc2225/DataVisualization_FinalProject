@@ -36,7 +36,7 @@ var heatMapVis = function(){
                         }
                         var value = 0.0;
                         if(parks == 1){value += (zipcodeData.properties.parks / 10);}
-                        if(schools == 1){value += zipcodeData.properties.schools / 5;}
+                        if(schools == 1){value += zipcodeData.properties.schools / 2;}
                         if(avgSAT !== "null"){
                         value += ( avgSAT * 10 / 2400 );} /* arbitrary multiplier of 10 */
                         try{
