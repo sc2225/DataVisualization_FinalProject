@@ -131,9 +131,9 @@ var heatMapVis = function(){
                             ){
                             return 'rgb(150,150,150)'
                         }else{
-                            var red = (255 * val);
-                            var green = (410 * val);
-                            var blue = (510 * val);
+                            var red = (220 * val);
+                            var green = (270 * val);
+                            var blue = (350 * val);
                             return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
                     })
@@ -201,8 +201,6 @@ var heatMapVis = function(){
                     .on('mouseout', function(d){
                         tool_tip.hide()
                     })
-
-                    //.on("click", function(d){newHeatMap.dispatch.call("selected", {}, SATdict[d.properties.ZIP]);});
                     .on("click", function(d){
                         
                         console.log(d);
@@ -265,9 +263,9 @@ var heatMapVis = function(){
                             ){
                                 return 'rgb(150,150,150)'
                         }else{
-                            var red = (255 * val);
-                            var green = (410 * val);
-                            var blue = (510* val);
+                            var red = (220 * val);
+                            var green = (270 * val);
+                            var blue = (350* val);
                             
                             return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
