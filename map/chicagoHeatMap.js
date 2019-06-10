@@ -11,6 +11,7 @@ var heatMapVis = function(){
                     var SATdict = {};
                     var rentDict={};
                     var zipcode = {};
+                    var ratings = {};
                     
                     var sats = [];
                     var rents = [];
@@ -46,7 +47,7 @@ var heatMapVis = function(){
                         catch(err){
                             return 0.0;
                         }
-                        return output;
+                        return output * 100; // 100 Multiplier 
                     }
 
                     var maxSAT = Math.max(...sats);
@@ -104,8 +105,6 @@ var heatMapVis = function(){
 
                 svg.call(tool_tip);
 
-                console.log("hasTooltip: " + hasTooltip)
-
                 if(hasTooltip == 1){
                     //Bind data and create one path per GeoJSON feature
                     svg.selectAll("path")
@@ -118,13 +117,14 @@ var heatMapVis = function(){
                     })
                     .attr("class", "path")
                     .attr("rating", function(d){
-                        return rating(d);
+                        ratings[d.properties.ZIP] = rating(d);
+                        return ratings[d.properties.ZIP];
                     })
                     .attr("sat", function(d){
                         return SATdict[d.properties.ZIP];
                     })
                     .attr("fill", function(d){
-                        var val = rating(d) *100; //TODO: replace this rating function
+                        var val = ratings[d.properties.ZIP] * 100; //TODO: replace this rating function
                         if(rentDict[d.properties.ZIP] > maxPrice || 
                             rentDict[d.properties.ZIP] < minPrice ||
                             SATdict[d.properties.ZIP] < bottom
@@ -240,13 +240,15 @@ var heatMapVis = function(){
                     })
                     .attr("class", "path")
                     .attr("rating", function(d){
-                        return rating(d);
+                        ratings[d.properties.ZIP] = rating(d);
+                        
+                        return ratings[d.properties.ZIP];
                     })
                     .attr("sat", function(d){
                         return SATdict[d.properties.ZIP];
                     })
                     .attr("fill", function(d){
-                        var val = rating(d) *100; //TODO: replace this rating function
+                        var val = rating(d); //Rating function gets value
                         if(rentDict[d.properties.ZIP] > maxPrice || 
                             rentDict[d.properties.ZIP] < minPrice ||
                             SATdict[d.properties.ZIP] < bottom
@@ -258,6 +260,17 @@ var heatMapVis = function(){
                         var green = (255 * val);
                         return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
+                    })
+                    .on("click", function(d){
+                        console.log("Clicked: " + d.properties.ZIP)
+                        console.log("Rating: " + ratings[d.properties.ZIP])
+
+                        d3.select("div#specificRating").selectAll("*").remove();
+
+                        d3.select("div#specificRating")
+                                .append("text")
+                                .text("Neighborhood: " + zipcode[d.properties.ZIP] + 
+                                    " Rating: " + ratings[d.properties.ZIP].toFixed(2));
                     })
                 }
                 });
