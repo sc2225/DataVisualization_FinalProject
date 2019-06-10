@@ -131,9 +131,9 @@ var heatMapVis = function(){
                             ){
                             return 'rgb(150,150,150)'
                         }else{
-                            var red = (255 * val);
-                            var green = (410 * val);
-                            var blue = (510 * val);
+                            var red = (220 * val);
+                            var green = (270 * val);
+                            var blue = (350 * val);
                             return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
                     })
@@ -263,9 +263,9 @@ var heatMapVis = function(){
                             ){
                                 return 'rgb(150,150,150)'
                         }else{
-                            var red = (255 * val);
-                            var green = (410 * val);
-                            var blue = (510* val);
+                            var red = (220 * val);
+                            var green = (270 * val);
+                            var blue = (350* val);
                             
                             return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
