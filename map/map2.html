@@ -145,7 +145,7 @@ tooltip styling*/
 		//Code for price slider:
 	var sliderRange = d3
 	 	.sliderBottom()
-		.min(d3.min(dataSlider))
+		.min(500)
 		.max(d3.max(dataSlider))
 		.width(250)
 	    .tickFormat(d3.format('.02s'))
@@ -201,14 +201,17 @@ tooltip styling*/
 
 	function getData(){
 
+    var chartSvg = d3.select("#chart")
+    var satSvg = d3.select("#SAT")
+
 		var parks = 0;
 		var schools = 0;
 
-		var minPrice =sliderRange.value().map(d3.format('.2r'))[0];
-		var maxPrice =sliderRange.value().map(d3.format('.2r'))[1];
+		var minPrice = Number(sliderRange.value().map(d3.format('.2r'))[0]);
+		var maxPrice = Number(sliderRange.value().map(d3.format('.2r'))[1]);
 		
-		var minSAT = sliderRangeSAT.value().map(d3.format('.3r'))[0];
-		var maxSAT = sliderRangeSAT.value().map(d3.format('.3r'))[1];
+		var minSAT = Number(sliderRangeSAT.value().map(d3.format('.3r'))[0]);
+		var maxSAT = Number(sliderRangeSAT.value().map(d3.format('.3r'))[1]);
 		
 		var checkArr = update();
 
@@ -217,7 +220,14 @@ tooltip styling*/
 
 		var reMap = heatMapVis();
 		
-		reMap.drawMap(chartSvg, 400, minPrice, maxPrice, parks, schools) /*svg, sat-min, minprice, maxprice, parks, schools*/
+    console.log("test HERE")
+    console.log("minPrice " + minPrice)
+    console.log("maxPrice " + maxPrice)
+    console.log("parks " + parks)
+    console.log("schools " + schools)
+
+    reMap.drawMap(chartSvg, minSAT, minPrice, maxPrice, parks, schools)
+		//reMap.drawMap(chartSvg, 400, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
 	}
 
 
