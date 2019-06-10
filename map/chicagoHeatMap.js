@@ -124,17 +124,17 @@ var heatMapVis = function(){
                         return SATdict[d.properties.ZIP];
                     })
                     .attr("fill", function(d){
-                        var val = ratings[d.properties.ZIP] * 100; //TODO: replace this rating function
+                        var val = ratings[d.properties.ZIP]; //TODO: replace this rating function
                         if(rentDict[d.properties.ZIP] > maxPrice || 
                             rentDict[d.properties.ZIP] < minPrice ||
                             SATdict[d.properties.ZIP] < bottom
                             ){
                             return 'rgb(150,150,150)'
                         }else{
-                        var red = (0 * val);
-                        var blue = (0 * val);
-                        var green = (255 * val);
-                        return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
+                            var red = (0 * val);
+                            var blue = (0 * val);
+                            var green = (255 * val);
+                            return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
                     })
 
@@ -226,6 +226,16 @@ var heatMapVis = function(){
                                 rentDict)
                             clickCount = 1
                         }
+
+                        console.log("Clicked: " + d.properties.ZIP)
+                        console.log("Rating: " + ratings[d.properties.ZIP])
+
+                        d3.select("div#specificRating").selectAll("*").remove();
+
+                        d3.select("div#specificRating")
+                                .append("text")
+                                .text("Neighborhood: " + zipcode[d.properties.ZIP] + 
+                                    " Rating: " + ratings[d.properties.ZIP].toFixed(2));
                     })
                 }
                 else{
@@ -253,12 +263,12 @@ var heatMapVis = function(){
                             rentDict[d.properties.ZIP] < minPrice ||
                             SATdict[d.properties.ZIP] < bottom
                             ){
-                            return 'rgb(150,150,150)'
+                                return 'rgb(150,150,150)'
                         }else{
-                        var red = (0 * val);
-                        var blue = (0 * val);
-                        var green = (255 * val);
-                        return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
+                            var red = (0 * val);
+                            var blue = (0 * val);
+                            var green = (255 * val);
+                            return `rgb(${Math.floor(red)}, ${Math.floor(green)}, ${Math.floor(blue)})`;
                         }
                     })
                     .on("click", function(d){
