@@ -4,9 +4,9 @@
 	display: block;
  	position: relative;
   padding-left: 60px;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 	cursor: pointer;
-	font-size: 13px;
+	font-size: 12px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -26,8 +26,8 @@
   position: absolute;
   top: 0;
   left: 30px;
-  height: 20px;
-  width: 20px;
+  height: 17px;
+  width: 17px;
   background-color: #eee;
 }
 
@@ -55,8 +55,8 @@
 
 /* Style the checkmark/indicator */
 .container-bootstrap-override .checkmark:after {
-  left: 8px;
-  top: 5px;
+  left: 6px;
+  top: 3px;
   width: 5px;
   height: 10px;
   border: solid white;

@@ -41,7 +41,7 @@ tooltip styling*/
 
   <div class="row" style="padding: 20px;">
     
-    <div class="ui-box" style='border-style: solid; border-width: 2px; width: 290px; border-color: #a3a3a3;' >
+    <div class="ui-box" style='border-style: solid; border-width: 2px; width: 230px; border-color: #a3a3a3;' >
         <div class="priceRange">
           <text>Price Range</text>
           <!-- <p id="value-range"></p> -->
@@ -71,18 +71,18 @@ tooltip styling*/
             <input type="checkbox" class="myCheckbox" value="parks"/> 
             <span class="checkmark"></span>
           </label>
-           <label class ="container-bootstrap-override">Police Stations
+    <!--        <label class ="container-bootstrap-override">Police Stations
              <input type="checkbox" class="myCheckbox" value="police"> 
              <span class="checkmark"></span>
-           </label>
+           </label> -->
            <label class ="container-bootstrap-override">Schools
              <input type="checkbox" class="myCheckbox" value="schools">
              <span class="checkmark"></span>
            </label>
-           <label class ="container-bootstrap-override">Health Clinics
+    <!--        <label class ="container-bootstrap-override">Health Clinics
              <input type="checkbox" class="myCheckbox" value="health-clinics">	
              <span class="checkmark"></span>
-           </label>
+           </label> -->
         </div>
       <button type="button" onclick="getData()">Done</button>
     </div>
@@ -117,17 +117,17 @@ tooltip styling*/
 	var gRange = d3
 		.select('div#slider-range')
 		.append('svg')
-		.attr('width', 500)
+		.attr('width', 300)
 		.attr('height', 80)
 		.append('g')
-		.attr('transform', 'translate(30,30)');
+		.attr('transform', 'translate(15,30)');
 	   
 	//Code for price slider:
 	var sliderRange = d3
 	 	.sliderBottom()
 		.min(700)
 		.max(2000)
-		.width(200)
+		.width(160)
 	    .tickFormat(d3.format('.02s'))
 	    .ticks(5)
 	    .default([700, 2000])
@@ -146,7 +146,7 @@ tooltip styling*/
 	   .sliderBottom()
 	   .min(700)
 	   .max(1300)
-	   .width(200)
+	   .width(160)
        .tickFormat(d3.format('0'))
        .ticks(5)
        .default([700, 1300])
@@ -166,10 +166,10 @@ tooltip styling*/
 	var gRangeSAT = d3
 	   .select('div#SAT-range')
 	   .append('svg')
-	   .attr('width', 500)
+	   .attr('width', 300)
 	   .attr('height', 80)
 	   .append('g')
-	   .attr('transform', 'translate(30,30)');
+	   .attr('transform', 'translate(15,30)');
 
 	gRangeSAT.call(sliderRangeSAT);
 
