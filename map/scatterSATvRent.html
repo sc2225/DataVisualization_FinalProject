@@ -34,15 +34,40 @@ body {
 
 <body>
 
-<div>
-    <a href="map2.html">Apartment Filtered Rating Map</a>
-    |
-    <a href="satvsrent.html">Rent vs SAT scores</a>
-    |
-    <a href="scatterSATvRent.html">Scatter Comparison</a>
-  </div>
+<div class="container-fluid">
+  <div class="row" style="background-color: #657B9F">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #657B9F">
+            <h3 class="navbar-brand">ChicagoCityMaps</h3>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            <div class="collapse navbar-collapse">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="map2.html">Apartment Filtered Rating Map</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="satvsrent.html">Rent vs SAT scores</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="scatterSATvRent.html">Scatter Comparison</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+          <div class="title" style="text-align: center; padding-top:30px;">
+              <h3 class="title">Scatter Comparison</h3>
+            </div>
+        <div id="scatter" style="padding-bottom: 30px;">
 
-  <h3>Scatter Comparison</h3>
+        </div>
+        <footer margin="0" class="row" style="background-color:  #657B9F; color: #fff; padding-top: 10px;">
+            <div margin="0" class="col-sm">
+              <p margin="0" style="vertical-align: bottom;">Chhuon, Kore, Swanson &nbsp;&nbsp;&nbsp;&nbsp;2019</p>
+            </div>
+        </footer>
+</div>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
 
@@ -75,7 +100,7 @@ var cValue = function(d) { return d.Manufacturer;},
     color = d3.scale.category10();
 
 // add the graph canvas to the body of the webpage
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#scatter").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
@@ -150,5 +175,7 @@ d3.csv("https://dhruvkore.github.io/DataVisualization_FinalProject/map/Avg-SAT-b
 });
 
 </script>
+
+</div>
 </body>
 </html>

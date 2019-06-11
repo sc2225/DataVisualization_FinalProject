@@ -27,73 +27,100 @@ tooltip styling*/
   font-size: 12px;
 }
 </style>
+</head>
 
 <body>
-  <div>
-    <a href="map2.html">Apartment Filtered Rating Map</a>
-    |
-    <a href="satvsrent.html">Rent vs SAT scores</a>
-    |
-    <a href="scatterSATvRent.html">Scatter Comparison</a>
-  </div>
-
-  <h3>Apartment Filtered Rating Map</h3>
-
-  <div class="row" style="padding: 20px;">
-    
-    <div class="ui-box" style='border-style: solid; border-width: 2px; width: 230px; border-color: #a3a3a3;' >
-        <div class="priceRange">
-          <text>Price Range</text>
-          <!-- <p id="value-range"></p> -->
-          <div id="value-range"></div>
-        </div>
-  
-        <div class="col-sm">
-          <div id="slider-range">
-          </div>
-        </div>
-  
-        <div class="SATSlider">
-          SAT Score Range
-          <div id ="SATtext"></div>
-        </div>
-  
-        <div class="col-sm">
-          <div id="SAT-range">
-          </div>
-        </div>
-  
-      
-        <!-- The checkbox amenitites -->
-        <div class="check-boxes" >	
-          <div class="checkbox-title">Amenities</div>
-          <label class ="container-bootstrap-override">Parks
-            <input type="checkbox" class="myCheckbox" value="parks"/> 
-            <span class="checkmark"></span>
-          </label>
-    <!--        <label class ="container-bootstrap-override">Police Stations
-             <input type="checkbox" class="myCheckbox" value="police"> 
-             <span class="checkmark"></span>
-           </label> -->
-           <label class ="container-bootstrap-override">Schools
-             <input type="checkbox" class="myCheckbox" value="schools">
-             <span class="checkmark"></span>
-           </label>
-    <!--        <label class ="container-bootstrap-override">Health Clinics
-             <input type="checkbox" class="myCheckbox" value="health-clinics">	
-             <span class="checkmark"></span>
-           </label> -->
-        </div>
-      <button type="button" onclick="getData()">Done</button>
+  <div class="container-fluid">
+      <div class="row" style="background-color: #657B9F">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #657B9F">
+    <h3 class="navbar-brand">ChicagoCityMaps</h3>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="map2.html">Apartment Filtered Rating Map</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="satvsrent.html">Rent vs SAT scores</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="scatterSATvRent.html">Scatter Comparison</a>
+        </li>
+      </ul>
     </div>
-
-    <div class="map">
-        <svg id="chart" width="700" height="450"></svg>
-        <svg id="legend" width="150" height="300"></svg>
-    </div>
-    <div id="specificRating"></div>
+  </nav>
+</div>
+  <div class="title" style="text-align: center; padding-top:30px;">
+    <h3 class="title">Apartment Filtered Rating Map</h3>
   </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm" style="padding-top: 40px;">
+          <div class="ui-box" style='border-style: solid; border-width: 2px; width: 230px; border-color: #a3a3a3;' >
+              <div class="priceRange">
+                <text>Price Range</text>
+                <!-- <p id="value-range"></p> -->
+                <div id="value-range"></div>
+              </div>
+        
+              <div class="col-sm">
+                <div id="slider-range">
+                </div>
+              </div>
+        
+              <div class="SATSlider">
+                SAT Score Range
+                <div id ="SATtext"></div>
+              </div>
+        
+              <div class="col-sm">
+                <div id="SAT-range">
+                </div>
+              </div>
+        
+            
+              <!-- The checkbox amenitites -->
+              <div class="check-boxes" >	
+                <div class="checkbox-title">Amenities</div>
+                <label class ="container-bootstrap-override">Parks
+                  <input type="checkbox" class="myCheckbox" value="parks"/> 
+                  <span class="checkmark"></span>
+                </label>
+          <!--        <label class ="container-bootstrap-override">Police Stations
+                   <input type="checkbox" class="myCheckbox" value="police"> 
+                   <span class="checkmark"></span>
+                 </label> -->
+                 <label class ="container-bootstrap-override">Schools
+                   <input type="checkbox" class="myCheckbox" value="schools">
+                   <span class="checkmark"></span>
+                 </label>
+          <!--        <label class ="container-bootstrap-override">Health Clinics
+                   <input type="checkbox" class="myCheckbox" value="health-clinics">	
+                   <span class="checkmark"></span>
+                 </label> -->
+              </div>
+            <div style="text-align: center; padding: 10px;">
+              <button  type="button" class="btn" style="background-color: #657B9F; color: #fff;" onclick="getData()">Done</button>
+            </div>
+          </div>
+      </div>
+      <div class="col-md">
+        <svg id="chart" width="650" height="650" style="padding-left: 25px;"></svg>
+      </div>
+      <div class="col-sm" >
+          <svg id="legend" width="150" height="300" ></svg>
+      </div>
+    </div>
+  </div>
+  <footer margin="0" class="row" style="background-color:  #657B9F; color: #fff; padding-top: 10px;">
+      <div margin="0" class="col-sm">
+        <p margin="0" style="vertical-align: bottom;">Chhuon, Kore, Swanson &nbsp;&nbsp;&nbsp;&nbsp;2019</p>
+      </div>
+  </footer>
     
+  </div>
 </body>
 <script>
 
