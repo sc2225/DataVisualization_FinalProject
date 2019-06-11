@@ -89,6 +89,7 @@ tooltip styling*/
 
     <div class="map">
         <svg id="chart" width="700" height="450"></svg>
+        <svg id="legend" width="150" height="300"></svg>
     </div>
     <div id="specificRating"></div>
   </div>
@@ -174,6 +175,54 @@ tooltip styling*/
 	gRangeSAT.call(sliderRangeSAT);
 
 	init_SATtext();
+
+	/*********Color Legend Code **********/
+	var defs = d3.select("#legend").append("defs");
+	var linearGradient = defs.append("linearGradient")
+    	.attr("id", "linear-gradient");
+
+
+    linearGradient
+    	.attr("x1", "0%")
+    	.attr("y1", "0%")
+    	.attr("x2", "0%")
+    	.attr("y2", "100%");
+    //Set the color for the start (0%)
+	linearGradient.append("stop")
+   		.attr("offset", "0%")
+    	.attr("stop-color", "rgb(180,221,286)"); //light blue
+
+	linearGradient.append("stop")
+   		.attr("offset", "10%")
+    	.attr("stop-color", "rgb(165,202,264)"); //light-med shade of blye
+
+    linearGradient.append("stop")
+	    .attr("offset", "30%")
+	    .attr("stop-opacity", .95)
+	    .attr("stop-color", "rgb(128, 158, 204)"); //med shade of blue
+
+
+    linearGradient.append("stop")
+	    .attr("offset", "55%")
+	    .attr("stop-color", "rgb(94, 115, 150)"); //med-dark shade of blue
+	    
+
+	//Set the color for the end (100%)
+	linearGradient.append("stop")
+	    .attr("offset", "100%")
+	    .attr("stop-opacity", 1)
+	    .attr("stop-color", "rgb(0,0,0)"); //black
+
+
+	//Draw the rectangle and fill with gradient
+	d3.select("#legend").append("rect")
+		.attr("id", "legend-bar")
+	    .attr("width", 20)
+	    .attr("height", 200)
+	    .style("fill", "url(#linear-gradient)");
+
+
+    /**********END OF LEGEND **************/
 
 	function getData(){
 
