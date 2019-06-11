@@ -217,9 +217,28 @@ tooltip styling*/
 	//Draw the rectangle and fill with gradient
 	d3.select("#legend").append("rect")
 		.attr("id", "legend-bar")
+		.attr("x", "0")
+		.attr("y", "5")
 	    .attr("width", 20)
 	    .attr("height", 200)
 	    .style("fill", "url(#linear-gradient)");
+
+	//add scales to the legend
+	d3.select("#legend")
+		.append("text")
+		.attr("x", "26")
+		.attr("y", "9")
+		.attr("fill", "black")
+		.attr("font-size", "10px")
+		.text("-- Best Match");
+
+	d3.select("#legend")
+		.append("text")
+		.attr("x", "26")
+		.attr("y", "206")
+		.attr("fill", "black")
+		.attr("font-size", "10px")
+		.text("-- No Match");  	    
 
 
     /**********END OF LEGEND **************/
