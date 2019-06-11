@@ -41,10 +41,11 @@ tooltip styling*/
 
   <div class="row" style="padding: 20px;">
     
-    <div class="ui-box" style='border-style: solid; border-width: 2px; width: 370px; border-color: #a3a3a3' >
+    <div class="ui-box" style='border-style: solid; border-width: 2px; width: 230px; border-color: #a3a3a3;' >
         <div class="priceRange">
-          <h6 align="center">Price Range</h6>
-          <p id="value-range"></p>
+          <text>Price Range</text>
+          <!-- <p id="value-range"></p> -->
+          <div id="value-range"></div>
         </div>
   
         <div class="col-sm">
@@ -53,11 +54,11 @@ tooltip styling*/
         </div>
   
         <div class="SATSlider">
-          <h6 align="center">SAT Score Range</h6>
-          <p id ="SATtext"></p>
+          SAT Score Range
+          <div id ="SATtext"></div>
         </div>
   
-        <div class="SAT-slider">
+        <div class="col-sm">
           <div id="SAT-range">
           </div>
         </div>
@@ -65,28 +66,28 @@ tooltip styling*/
       
         <!-- The checkbox amenitites -->
         <div class="check-boxes" >	
-          <h6 align="center">Amenities</h6>
+          <div class="checkbox-title">Amenities</div>
           <label class ="container-bootstrap-override">Parks
             <input type="checkbox" class="myCheckbox" value="parks"/> 
             <span class="checkmark"></span>
           </label>
-           <label class ="container-bootstrap-override">Police Stations
+    <!--        <label class ="container-bootstrap-override">Police Stations
              <input type="checkbox" class="myCheckbox" value="police"> 
              <span class="checkmark"></span>
-           </label>
+           </label> -->
            <label class ="container-bootstrap-override">Schools
              <input type="checkbox" class="myCheckbox" value="schools">
              <span class="checkmark"></span>
            </label>
-           <label class ="container-bootstrap-override">Health Clinics
+    <!--        <label class ="container-bootstrap-override">Health Clinics
              <input type="checkbox" class="myCheckbox" value="health-clinics">	
              <span class="checkmark"></span>
-           </label>
+           </label> -->
         </div>
       <button type="button" onclick="getData()">Done</button>
     </div>
 
-    <div>
+    <div class="map">
         <svg id="chart" width="700" height="450"></svg>
     </div>
     <div id="specificRating"></div>
@@ -116,23 +117,23 @@ tooltip styling*/
 	var gRange = d3
 		.select('div#slider-range')
 		.append('svg')
-		.attr('width', 500)
-		.attr('height', 90)
+		.attr('width', 300)
+		.attr('height', 80)
 		.append('g')
-		.attr('transform', 'translate(30,30)');
+		.attr('transform', 'translate(15,30)');
 	   
 	//Code for price slider:
 	var sliderRange = d3
 	 	.sliderBottom()
 		.min(700)
 		.max(2000)
-		.width(250)
+		.width(160)
 	    .tickFormat(d3.format('.02s'))
 	    .ticks(5)
 	    .default([700, 2000])
 	    .fill('#2196f3')
 	    .on('onchange', val => {
-		    d3.select('p#value-range')
+		    d3.select('div#value-range')
 		      .text("From " + val.map(d3.format('.02s'))
 		      .join(' to '))
 		});
@@ -145,13 +146,13 @@ tooltip styling*/
 	   .sliderBottom()
 	   .min(700)
 	   .max(1300)
-	   .width(250)
+	   .width(160)
        .tickFormat(d3.format('0'))
        .ticks(5)
        .default([700, 1300])
        .fill('#2196f3')
        .on('onchange', val => {
-	      d3.select('p#SATtext')
+	      d3.select('div#SATtext')
 	      	.text("From " + val.map(d3.format('.3r'))
 	      	.join(' to '))
 	    });
@@ -165,10 +166,10 @@ tooltip styling*/
 	var gRangeSAT = d3
 	   .select('div#SAT-range')
 	   .append('svg')
-	   .attr('width', 500)
-	   .attr('height', 90)
+	   .attr('width', 300)
+	   .attr('height', 80)
 	   .append('g')
-	   .attr('transform', 'translate(30,30)');
+	   .attr('transform', 'translate(15,30)');
 
 	gRangeSAT.call(sliderRangeSAT);
 

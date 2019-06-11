@@ -1,12 +1,12 @@
 
 
 .container-bootstrap-override {
-	display: block;
+	/*display: block;*/
  	position: relative;
-  padding-left: 40px;
-  margin-bottom: 12px;
+  padding-left: 50px;
+  margin-bottom: 6px;
 	cursor: pointer;
-	font-size: 14px;
+	font-size: 12px;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -25,9 +25,9 @@
 .checkmark {
   position: absolute;
   top: 0;
-  left: 10px;
-  height: 20px;
-  width: 20px;
+  left: 25px;
+  height: 17px;
+  width: 17px;
   background-color: #eee;
 }
 
@@ -55,25 +55,38 @@
 
 /* Style the checkmark/indicator */
 .container-bootstrap-override .checkmark:after {
-  left: 9px;
-  top: 5px;
+  left: 6px;
+  top: 3px;
   width: 5px;
   height: 10px;
   border: solid white;
-  border-width: 0 3px 3px 0;
+  border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
-p#value-range {
+div#value-range {
 	padding-left: 0px;
 	text-align: center;
-	font-size: 13px;
+	font-size: 12px;
 }
 
-p#SATtext {
+div#SATtext {
   padding-left: 0px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
 }
+
+.priceRange, .SATSlider,.checkbox-title {
+  text-align: center;
+  font-size: 14px;
+}
+
+/*.ui-box {
+  position: absolute;
+}
+
+.map {
+
+}*/
