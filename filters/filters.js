@@ -26,12 +26,7 @@
           	if(cb.property("checked")){
           		if (cb.property)
           			choices.push(cb.property("value"));
-          		} 
-
-          	//The line of text is for testing: makes sure the right boxes are being triggered
-          	d3.select("#textline")
-          		.text(choices);
-
+          		}
         });
         return choices;
 	}
