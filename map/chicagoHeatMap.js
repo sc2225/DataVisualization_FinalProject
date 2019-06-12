@@ -149,7 +149,7 @@ var heatMapVis = function(){
 
                             var tipSVG = d3.select("#tipDiv")
                             .append("svg")
-                            .attr("width", 150)
+                            .attr("width", 100)
                             .attr("height", 100);
 
                             var tiprent = d3.select("#tipDiv").select("svg");

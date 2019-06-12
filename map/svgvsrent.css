@@ -1,0 +1,14 @@
+#chart {
+	position:relative;
+
+}
+
+#legend {
+	position:relative;
+}
+
+div#specificRating {
+	position:relative;
+	left:450px;
+	top: -300px;
+}
