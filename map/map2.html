@@ -294,7 +294,15 @@ tooltip styling*/
 	    console.log("parks " + parks)
 	    console.log("schools " + schools)
 
-	    reMap.drawMap(chartSvg, minSAT, maxSAT, minPrice, maxPrice, parks, schools, hasToolTip)
+	    var redraw = reMap.drawMap(chartSvg, minSAT, maxSAT, minPrice, maxPrice, parks, schools, hasToolTip);
+	    sessionStorage.setItem('minSAT', JSON.stringify(minSAT));
+	    sessionStorage.setItem('maxSAT', JSON.stringify(maxSAT));
+	    sessionStorage.setItem('minPrice', JSON.stringify(minPrice));
+	    sessionStorage.setItem('maxPrice', JSON.stringify(maxPrice));
+	    sessionStorage.setItem('parks', JSON.stringify(parks));
+	    sessionStorage.setItem('schools', JSON.stringify(schools));
+
+	    
 	}
 
 

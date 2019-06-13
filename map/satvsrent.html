@@ -164,7 +164,24 @@ tooltip styling*/
 
     var HM = heatMapVis();
     var hasToolTip = 1;
-	HM.drawMap(chartSvg, 400, 1300, 0, 3000, 0, 0, hasToolTip) /*svg, sat-min, minprice, maxprice, parks, schools*/
+
+	if (sessionStorage.getItem('minSAT') === null && sessionStorage.getItem('maxSAT') === null && 
+		sessionStorage.getItem('minPrice') === null && sessionStorage.getItem('maxPrice') === null &&
+		sessionStorage.getItem('parks') === null && sessionStorage.getItem('schools') === null) {
+			HM.drawMap(chartSvg, 400, 1300, 0, 3000, 0, 0, hasToolTip) 
+	} else {
+
+		var stored_minSAT = JSON.parse(sessionStorage.getItem('minSAT'));
+		var stored_maxSAT = JSON.parse(sessionStorage.getItem('maxSAT'));
+	    var stored_minPrice = JSON.parse(sessionStorage.getItem('minPrice'));
+	    var stored_maxPrice = JSON.parse(sessionStorage.getItem('maxPrice'));
+	    var stored_parks = JSON.parse(sessionStorage.getItem('parks'));
+	    var stored_schools = JSON.parse(sessionStorage.getItem('schools'));
+	    var stored_hasToolTip = JSON.parse(sessionStorage.getItem('hasToolTip'));
+	  
+	   HM.drawMap(chartSvg, stored_minSAT, stored_maxSAT, stored_minPrice, stored_maxPrice, stored_parks, stored_schools, hasToolTip);
+	   sessionStorage.clear();
+	}
 
 	HM.dispatch.on("selected",
   		function(d){
@@ -172,37 +189,6 @@ tooltip styling*/
         	console.log(`AVG sat is: ${d}`);
     	});
 
-	function getData(){
-
-    var chartSvg = d3.select("#chart")
-    var satSvg = d3.select("#SAT")
-
-		var parks = 0;
-		var schools = 0;
-		var hasToolTip = 1;
-
-		var minPrice = Number(sliderRange.value().map(d3.format('.2r'))[0]);
-		var maxPrice = Number(sliderRange.value().map(d3.format('.2r'))[1]);
-		
-		var minSAT = Number(sliderRangeSAT.value().map(d3.format('.3r'))[0]);
-		var maxSAT = Number(sliderRangeSAT.value().map(d3.format('.3r'))[1]);
-		
-		var checkArr = update();
-
-		checkArr.includes("parks") ? parks = 1 : parks = 0;
-		checkArr.includes("schools") ? schools = 1 : schools = 0;
-
-		var reMap = heatMapVis();
-		
-    console.log("test HERE")
-    console.log("minPrice " + minPrice)
-    console.log("maxPrice " + maxPrice)
-    console.log("parks " + parks)
-    console.log("schools " + schools)
-
-    reMap.drawMap(chartSvg, minSAT, minPrice, maxPrice, parks, schools, hasToolTip)
-		//reMap.drawMap(chartSvg, 400, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
-	}
 
 
   /*
