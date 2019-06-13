@@ -130,7 +130,7 @@ tooltip styling*/
 
 	/**Initialize heatmap**/
     var HM = heatMapVis();
-	HM.drawMap(chartSvg, 400, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
+	HM.drawMap(chartSvg, 728, 1280, 0, 3000, 0, 0) /*svg, sat-min, minprice, maxprice, parks, schools*/
 
 	HM.dispatch.on("selected",
   		function(d){
@@ -168,12 +168,12 @@ tooltip styling*/
 
 	var sliderRangeSAT = d3
 	   .sliderBottom()
-	   .min(700)
-	   .max(1300)
+	   .min(780)
+	   .max(1278)
 	   .width(160)
        .tickFormat(d3.format('0'))
        .ticks(5)
-       .default([700, 1300])
+       .default([780, 1278])
        .fill('#2196f3')
        .on('onchange', val => {
 	      d3.select('div#SATtext')
@@ -294,7 +294,7 @@ tooltip styling*/
 	    console.log("parks " + parks)
 	    console.log("schools " + schools)
 
-	    reMap.drawMap(chartSvg, minSAT, minPrice, maxPrice, parks, schools, hasToolTip)
+	    reMap.drawMap(chartSvg, minSAT, maxSAT, minPrice, maxPrice, parks, schools, hasToolTip)
 	}
 
 
