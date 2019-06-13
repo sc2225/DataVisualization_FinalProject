@@ -2,7 +2,7 @@
 
 var heatMapVis = function(){
     var newHeatMap = {
-        drawMap: function(svg, bottom, minPrice, maxPrice, parks, schools, hasTooltip){
+        drawMap: function(svg, bottom, top, minPrice, maxPrice, parks, schools, hasTooltip){
             
             d3.json("https://dhruvkore.github.io/DataVisualization_FinalProject/map/chicago.json"/*"chicago.json"*/, function(json) {
 
@@ -22,6 +22,11 @@ var heatMapVis = function(){
                         SATdict[data[d].zip] = data[d].avgSAT;
                         rentDict[data[d].zip] = data[d].MedGrossRent;
                         zipcode[data[d].zip] = data[d].zip;
+                        // sats.push(data[d].avgSAT)
+                        // rents.push(data[d].MedGrossRent)
+                        // SATdict[data[d].zip] = data[d].avgSAT;
+                        // rentDict[data[d].zip] = data[d].MedGrossRent;
+                        // zipcode[data[d].zip] = data[d].zip;
 
                     }
 
@@ -31,7 +36,8 @@ var heatMapVis = function(){
                         var avgSAT = SATdict[zipcodeData.properties.ZIP];
                         if(minPrice > /*zipcodeData.MedGrossRent*/ medRent || 
                             maxPrice < /*zipcodeData.MedGrossRent*/ medRent || 
-                            bottom > /*zipcodeData.avgSAT*/ avgSAT){
+                            bottom > /*zipcodeData.avgSAT*/ avgSAT || 
+                            top < avgSAT) {
                             return 0.0;
                         }
                         var value = 0.0;
@@ -127,7 +133,8 @@ var heatMapVis = function(){
                         var val = ratings[d.properties.ZIP]; //TODO: replace this rating function
                         if(rentDict[d.properties.ZIP] > maxPrice || 
                             rentDict[d.properties.ZIP] < minPrice ||
-                            SATdict[d.properties.ZIP] < bottom
+                            SATdict[d.properties.ZIP] < bottom ||
+                            SATdict[d.properties.ZIP] > top
                             ){
                             return 'rgb(150,150,150)'
                         }else{
@@ -259,7 +266,8 @@ var heatMapVis = function(){
                         var val = rating(d); //Rating function gets value
                         if(rentDict[d.properties.ZIP] > maxPrice || 
                             rentDict[d.properties.ZIP] < minPrice ||
-                            SATdict[d.properties.ZIP] < bottom
+                            SATdict[d.properties.ZIP] < bottom ||
+                            SATdict[d.properties.ZIP] > top
                             ){
                                 return 'rgb(150,150,150)'
                         }else{
